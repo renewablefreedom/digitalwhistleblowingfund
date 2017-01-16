@@ -12,9 +12,11 @@
 
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav">
+            {{#if session.isAuthenticated}}
             {{#link-to 'proposals.all' tagName="li"}}<a href="">Proposals</a>{{/link-to}}
             {{#if (not-eq currentUser.user.id "1")}}
               {{#link-to 'proposals.new' tagName="li"}}<a href="">Add your Proposal</a>{{/link-to}}
+            {{/if}}
             {{/if}}
       </ul>
       <ul class="nav navbar-nav navbar-right">
