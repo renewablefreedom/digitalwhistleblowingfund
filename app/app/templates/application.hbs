@@ -1,13 +1,4 @@
+{{partial 'navbar' }}
 <div class="container">
-  {{partial 'navbar'}}
   {{outlet}}
-</div>
-
-<div class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container">
-    <p class="navbar-text pull-left">
-      {{#link-to 'about'}}<a href="">About</a>{{/link-to}}
-      &nbsp; {{#link-to 'contact'}}<a href="">Contact</a>{{/link-to}}
-    </p>
-  </div>
 </div>
