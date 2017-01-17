@@ -1,9 +1,19 @@
 @import "bootstrap";
 
+@font-face {
+   font-family: 'Open Sans';
+   src:         local('Open Sans'), local('OpenSans'), 
+                url('/assets/Open_Sans_v13_latin_400.woff2') format('woff2'),
+                url('/assets/Open_Sans_v13_latin_400.woff') format('woff');
+   font-style:  normal;
+   font-weight: 400;
+}
+
 body {
   background: url("/assets/images/wc8k-kryepm-joel-filipe-light.jpg") no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1.4em;
 }
  
