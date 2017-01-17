@@ -14,9 +14,10 @@
       <ul class="nav navbar-nav">
             {{#link-to 'contact' tagName="li"}}<a href="">Contact</a>{{/link-to}}
             {{#if session.isAuthenticated}}
+            {{#link-to 'how-it-works' tagName="li"}}<a href="">How it works</a>{{/link-to}}
             {{#link-to 'proposals.all' tagName="li"}}<a href="">Proposals</a>{{/link-to}}
             {{#if (not-eq currentUser.user.id "1")}}
-              {{#link-to 'proposals.new' tagName="li"}}<a href="">Add your Proposal</a>{{/link-to}}
+              {{#link-to 'proposals.new' tagName="li"}}<a href=""><span class="glyphicon glyphicon-circle-arrow-right"></span> Submit New Proposal</a>{{/link-to}}
             {{/if}}
             {{/if}}
       </ul>
