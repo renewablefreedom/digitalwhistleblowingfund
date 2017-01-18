@@ -7,15 +7,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      {{#link-to 'index' class="navbar-brand"}}Digital Rights Fund{{/link-to}}
+      {{link-to 'Digital Rights Fund' 'index' class="navbar-brand"}}
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav">
-            {{#link-to 'contact' tagName="li"}}<a href="">Contact</a>{{/link-to}}
+            <li>{{link-to 'Contact' 'contact'}}</li>
             {{#if session.isAuthenticated}}
-            {{#link-to 'how-it-works' tagName="li"}}<a href="">How it works</a>{{/link-to}}
-            {{#link-to 'proposals.all' tagName="li"}}<a href="">Proposals</a>{{/link-to}}
+            <li>{{link-to 'How it works' 'how-it-works'}}</li>
+            <li>{{link-to 'Proposals' 'proposals.all'}}</li>
             {{#if (not-eq currentUser.user.id "1")}}
               {{#link-to 'proposals.new' tagName="li"}}<a href=""><span class="glyphicon glyphicon-circle-arrow-right"></span> Submit New Proposal</a>{{/link-to}}
             {{/if}}
@@ -32,7 +32,7 @@
                   {{/if}}
               </a></li>
             {{else}}
-              {{#link-to 'login' tagName="li"}}<a href=""><span class="glyphicon glyphicon-log-out"></span> Login</a>{{/link-to}}
+              <li>{{#link-to 'login'}}<span class="glyphicon glyphicon-log-out"></span> Login{{/link-to}}</li>
             {{/if}}
       </ul>
     </div><!-- /.navbar-collapse -->
