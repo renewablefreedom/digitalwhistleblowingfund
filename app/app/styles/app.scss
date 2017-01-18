@@ -16,7 +16,11 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 1.4em;
 }
- 
+
+#hiddenwithoutjavascript {
+    display: none;
+}
+
 .container {
     background: rgba(255,255,255,0.9);
     padding-bottom: 10px;

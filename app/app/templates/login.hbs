@@ -4,7 +4,7 @@
   <p>Please let us know if this is a problem for you.</p>
   </noscript>
 
-  <script type="text/javascript"> 
+  <div id="hiddenwithoutjavascript">
   <h2>Login</h2>
   <p>Please enter your credentials below</p>
 
@@ -29,8 +29,12 @@
   </div>
 
   </form>
+  </div>
+
+  <script type="text/javascript">
+   document.getElementById("hiddenwithoutjavascript").style.display = "inline";
   </script>
-  
+
   {{#if errorMessage}}
     <div class="alert alert-danger">{{errorMessage}}</div>
   {{/if}}
