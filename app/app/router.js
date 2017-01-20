@@ -18,6 +18,7 @@ Router.map(function() {
   this.route('signup', { path: '/signup/:token' });
   this.route('contact');
   this.route('how-it-works');
+  this.route('details');
 });
 
 export default Router;

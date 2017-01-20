@@ -12,6 +12,7 @@
 
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav">
+            <li>{{link-to 'Details' 'details'}}</li>
             <li>{{link-to 'Contact' 'contact'}}</li>
             {{#if session.isAuthenticated}}
             <li>{{link-to 'How it works' 'how-it-works'}}</li>
