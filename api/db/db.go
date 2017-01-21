@@ -49,7 +49,7 @@ func GetDatabase() *sql.DB {
 				  about       	text,
 				  email       	text		NOT NULL,
 				  activated   	bool		DEFAULT false,
-				  authtoken   	text      	NOT NULL,
+				  authtoken   	text[]     	NOT NULL,
 				  CONSTRAINT  	uk_username	UNIQUE (username),
 				  CONSTRAINT  	uk_email 	UNIQUE (email)
 				)`,
@@ -61,7 +61,7 @@ func GetDatabase() *sql.DB {
 				  description	text      	NOT NULL,
 				  recipient		text		NOT NULL,
 				  value			int			NOT NULL,
-				  ends			timestamp	NOT NULL,
+				  starts		timestamp	NOT NULL,
 				  votes	      	int       	DEFAULT 0,
 				  moderated     bool        DEFAULT false,
 				  CONSTRAINT  	fk_user		FOREIGN KEY (userid) REFERENCES users (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE
@@ -82,10 +82,11 @@ func GetDatabase() *sql.DB {
 		// See: http://www.postgresql.org/docs/devel/static/sql-createindex.html
 		indexes := []string{
 			`CREATE INDEX idx_users_email ON users(email)`,
+			`CREATE INDEX idx_users_authtoken ON users(authtoken)`,
 			`CREATE INDEX idx_proposals_moderated ON proposals(moderated)`,
 			`CREATE INDEX idx_proposals_value ON proposals(value)`,
 			`CREATE INDEX idx_proposals_userid ON proposals(userid)`,
-			`CREATE INDEX idx_proposals_ends ON proposals(ends)`,
+			`CREATE INDEX idx_proposals_starts ON proposals(starts)`,
 			`CREATE INDEX idx_votes_userid ON votes(userid)`,
 			`CREATE INDEX idx_votes_proposalid ON votes(proposalid)`,
 		}

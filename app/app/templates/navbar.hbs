@@ -16,9 +16,9 @@
             <li>{{link-to 'Contact' 'contact'}}</li>
             {{#if session.isAuthenticated}}
             <li>{{link-to 'How it works' 'how-it-works'}}</li>
-            <li>{{link-to 'Proposals' 'proposals.all'}}</li>
+            <li>{{link-to 'Proposals' 'proposals'}}</li>
             {{#if (not-eq currentUser.user.id "1")}}
-              {{#link-to 'proposals.new' tagName="li"}}<a href=""><span class="glyphicon glyphicon-circle-arrow-right"></span> Submit New Proposal</a>{{/link-to}}
+              <li>{{#link-to 'proposals.new'}}<a href=""><span class="glyphicon glyphicon-circle-arrow-right"></span> Submit New Proposal{{/link-to}}</li>
             {{/if}}
             {{/if}}
       </ul>

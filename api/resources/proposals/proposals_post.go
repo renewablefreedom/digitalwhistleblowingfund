@@ -19,7 +19,7 @@ type ProposalPostStruct struct {
 		Recipient   string    `json:"recipient"`
 		Value       uint64    `json:"value"`
 		Moderated   bool      `json:"moderated"`
-		Ends        time.Time `json:"ends"`
+		Starts      time.Time `json:"starts"`
 	} `json:"proposal"`
 }
 
@@ -65,14 +65,14 @@ func (r *ProposalResource) Post(context smolder.APIContext, request *restful.Req
 		Description: pps.Proposal.Description,
 		Recipient:   pps.Proposal.Recipient,
 		Value:       pps.Proposal.Value,
-		Ends:        pps.Proposal.Ends,
+		Starts:      pps.Proposal.Starts,
 	}
 	err = proposal.Save(context.(*db.PollyContext))
 	if err != nil {
 		smolder.ErrorResponseHandler(request, response, smolder.NewErrorResponse(
 			http.StatusInternalServerError,
 			true,
-			"Can't create proposal",
+			err,
 			"ProposalResource POST"))
 		return
 	}

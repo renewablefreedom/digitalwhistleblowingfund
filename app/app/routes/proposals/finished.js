@@ -2,13 +2,20 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+    activate: function() {
+        this._super();
+        Ember.$('grantsFinished').button('toggle');
+    },
+
     model() {
        return Ember.RSVP.hash({
-           budget: this.store.findAll('budget')
+         finishedProposals: this.store.query('proposal', {
+             ended: true
+         })
        });
      },
 
      setupController(controller, models) {
-       controller.set('budget', models.budget);
+       controller.set('finishedProposals', models.finishedProposals);
      }
 });

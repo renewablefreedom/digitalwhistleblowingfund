@@ -21,12 +21,15 @@ type proposalInfoResponse struct {
 	ID          int64     `json:"id"`
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
+	User        int64     `json:"user"`
 	Recipient   string    `json:"recipient"`
 	Value       uint64    `json:"value"`
 	GrantType   string    `json:"granttype"`
 	URL         string    `json:"url"`
+	Starts      time.Time `json:"starts"`
 	Ends        time.Time `json:"ends"`
 	Ended       bool      `json:"ended"`
+	Accepted    bool      `json:"accepted"`
 	Moderated   bool      `json:"moderated"`
 	Votes       uint64    `json:"votes"`
 }
@@ -63,16 +66,19 @@ func prepareProposalResponse(context smolder.APIContext, proposal *db.Proposal) 
 		ID:          proposal.ID,
 		Title:       proposal.Title,
 		Description: proposal.Description,
+		User:        proposal.UserID,
 		Recipient:   proposal.Recipient,
 		Value:       proposal.Value,
-		Ends:        proposal.Ends,
+		Starts:      proposal.Starts,
+		Ends:        proposal.Ends(ctx),
 		Ended:       proposal.Ended(ctx),
 		Votes:       proposal.Votes,
+		Accepted:    proposal.Accepted(ctx),
 		Moderated:   proposal.Moderated,
 		URL:         utils.BuildURL(ctx.Config.Web.BaseURL, *proposal),
 	}
 
-	if proposal.Value < 2500 {
+	if proposal.Value < uint64(ctx.Config.App.Proposals.SmallGrantValueThreshold) {
 		resp.GrantType = "small"
 	} else {
 		resp.GrantType = "large"

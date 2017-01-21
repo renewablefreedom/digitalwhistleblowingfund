@@ -13,6 +13,11 @@ Router.map(function() {
     this.route('new');
     this.route('show', { path: '/:proposal_id' });
     this.route('all');
+    this.route('finished');
+    this.route('accepted');
+    this.route('rejected');
+    this.route('edit', { path: '/edit/:proposal_id' });
+    this.route('own');
   });
   this.route('login');
   this.route('signup', { path: '/signup/:token' });
