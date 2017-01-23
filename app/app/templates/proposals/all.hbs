@@ -1,5 +1,5 @@
 <div>
-  <h4>These are fairly small proposals</h4>
+  <h4>Micro Grant Proposals (below 2000€)</h4>
   <table class="table table-striped">
 <!--    <caption>Running Small Grant Proposals</caption>-->
     <thead>
@@ -11,7 +11,7 @@
         {{#if (eq currentUser.user.id "1")}}
             <th>Moderated</th>
         {{/if}}
-	    <th class="text-right">Votes</th>
+	    <th class="text-right">Votes Against</th>
       </tr>
     </thead>
     <tbody>
@@ -34,7 +34,7 @@
     </tbody>
   </table>
 
-  {{activeSmallGrantCount}} small grant proposals
+  {{activeSmallGrantCount}} micro grant proposals
   {{#if (eq currentUser.user.id "1")}}
     ({{inactiveSmallGrantCount}} awaiting moderation)
   {{/if}}
@@ -58,7 +58,7 @@
         {{#if (eq currentUser.user.id "1")}}
             <th>Moderated</th>
         {{/if}}
-	    <th class="text-right">Votes</th>
+	    <th class="text-right">Votes For</th>
       </tr>
     </thead>
     <tbody>
@@ -87,7 +87,7 @@
   {{/if}}
 
   {{else}}
-  <h4>Currently there are no large grant proposals to vote for!</h4>
+  <h4>Currently there are no large grant proposals (above 2000€) to vote for.</h4>
   {{/if}}
 
 </div>
