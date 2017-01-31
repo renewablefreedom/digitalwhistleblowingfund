@@ -11,7 +11,10 @@ type Proposal struct {
 	UserID      int64
 	Title       string
 	Description string
+	Activities  string
+	Contact     string
 	Recipient   string
+	Recipient2  string
 	Value       uint64
 	Starts      time.Time
 	Votes       uint64
@@ -25,7 +28,7 @@ func (context *PollyContext) LoadProposalByID(id int64) (Proposal, error) {
 		return proposal, ErrInvalidID
 	}
 
-	err := context.QueryRow("SELECT id, userid, title, description, recipient, value, starts, votes, moderated FROM proposals WHERE id = $1", id).Scan(&proposal.ID, &proposal.UserID, &proposal.Title, &proposal.Description, &proposal.Recipient, &proposal.Value, &proposal.Starts, &proposal.Votes, &proposal.Moderated)
+	err := context.QueryRow("SELECT id, userid, title, description, activities, contact, recipient, recipient2, value, starts, votes, moderated FROM proposals WHERE id = $1", id).Scan(&proposal.ID, &proposal.UserID, &proposal.Title, &proposal.Description, &proposal.Activities, &proposal.Contact, &proposal.Recipient, &proposal.Recipient2, &proposal.Value, &proposal.Starts, &proposal.Votes, &proposal.Moderated)
 	return proposal, err
 }
 
@@ -45,7 +48,7 @@ func (context *PollyContext) GetProposalByID(id int64) (Proposal, error) {
 func (context *PollyContext) LoadAllProposals() ([]Proposal, error) {
 	proposals := []Proposal{}
 
-	rows, err := context.Query("SELECT id, userid, title, description, recipient, value, starts, votes, moderated FROM proposals ORDER BY starts ASC")
+	rows, err := context.Query("SELECT id, userid, title, description, activities, contact, recipient, recipient2, value, starts, votes, moderated FROM proposals ORDER BY starts ASC")
 	if err != nil {
 		return proposals, err
 	}
@@ -53,7 +56,7 @@ func (context *PollyContext) LoadAllProposals() ([]Proposal, error) {
 	defer rows.Close()
 	for rows.Next() {
 		proposal := Proposal{}
-		err = rows.Scan(&proposal.ID, &proposal.UserID, &proposal.Title, &proposal.Description, &proposal.Recipient, &proposal.Value, &proposal.Starts, &proposal.Votes, &proposal.Moderated)
+		err = rows.Scan(&proposal.ID, &proposal.UserID, &proposal.Title, &proposal.Description, &proposal.Activities, &proposal.Contact, &proposal.Recipient, &proposal.Recipient2, &proposal.Value, &proposal.Starts, &proposal.Votes, &proposal.Moderated)
 		if err != nil {
 			return proposals, err
 		}
@@ -66,7 +69,7 @@ func (context *PollyContext) LoadAllProposals() ([]Proposal, error) {
 
 // Update a proposal in the database
 func (proposal *Proposal) Update(context *PollyContext) error {
-	_, err := context.Exec("UPDATE proposals SET title = $1, description = $2, recipient = $3, value = $4, starts = $5, moderated = $6 WHERE id = $7", proposal.Title, proposal.Description, proposal.Recipient, proposal.Value, proposal.Starts, proposal.Moderated, proposal.ID)
+	_, err := context.Exec("UPDATE proposals SET title = $1, description = $2, activities = $3, contact = $4, recipient = $5, recipient2 = $6, value = $7, starts = $8, moderated = $9 WHERE id = $10", proposal.Title, proposal.Description, proposal.Activities, proposal.Contact, proposal.Recipient, proposal.Recipient2, proposal.Value, proposal.Starts, proposal.Moderated, proposal.ID)
 	if err != nil {
 		panic(err)
 	}
@@ -78,7 +81,7 @@ func (proposal *Proposal) Update(context *PollyContext) error {
 // Save a proposal to the database
 func (proposal *Proposal) Save(context *PollyContext) error {
 	if proposal.Value > uint64(context.Config.App.Proposals.MaxGrantValue) {
-		proposal.Value = uint64(context.Config.App.Proposals.MaxGrantValue)
+		return errors.New("Grant value is too high")
 	}
 
 	if proposal.Value < uint64(context.Config.App.Proposals.SmallGrantValueThreshold) {
@@ -91,7 +94,7 @@ func (proposal *Proposal) Save(context *PollyContext) error {
 		return errors.New("Invalid start date")
 	}
 
-	err := context.QueryRow("INSERT INTO proposals (userid, title, description, recipient, value, starts) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id", proposal.UserID, proposal.Title, proposal.Description, proposal.Recipient, proposal.Value, proposal.Starts).Scan(&proposal.ID)
+	err := context.QueryRow("INSERT INTO proposals (userid, title, description, activities, contact, recipient, recipient2, value, starts) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id", proposal.UserID, proposal.Title, proposal.Description, proposal.Activities, proposal.Contact, proposal.Recipient, proposal.Recipient2, proposal.Value, proposal.Starts).Scan(&proposal.ID)
 	proposalsCache.Delete(proposal.ID)
 	return err
 }
