@@ -5,7 +5,7 @@
     <thead>
       <tr>
         <th>Title</th>
-        <th>Value</th>
+        <th>Amount</th>
         <th>Recipient</th>
 	    <th>Starts</th>
         {{#if (eq currentUser.user.id "1")}}
@@ -18,7 +18,7 @@
     {{#each rejectedProposals as |proposal|}}
       <tr>
         <td>{{#link-to "proposals.show" proposal.id}}{{proposal.title}}{{/link-to}}</td>
-        <td>{{proposal.value}} &euro;</td>
+        <td>{{format-money proposal.value}}</td>
         <td>{{proposal.recipient}}</td>
         <td>{{moment-from-now proposal.starts}}</td>
         {{#if (eq currentUser.user.id "1")}}
