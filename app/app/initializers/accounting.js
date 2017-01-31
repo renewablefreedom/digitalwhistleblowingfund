@@ -1,4 +1,4 @@
-import { currency, number } from "accounting/settings";
+import { currency } from "accounting/settings";
 
 export default {
   name: 'accounting.js',
