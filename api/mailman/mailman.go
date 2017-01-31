@@ -63,10 +63,18 @@ func RunLoop() {
 		c   *imap.Client
 		cmd *imap.Command
 		rsp *imap.Response
+		err error
 	)
 
 	// Connect to the server
-	c, _ = imap.DialTLS(context.Config.Connections.Email.IMAP.Server+":"+strconv.FormatInt(int64(context.Config.Connections.Email.IMAP.Port), 10), nil)
+	if context.Config.Connections.Email.IMAP.Port == 993 {
+		c, err = imap.DialTLS(context.Config.Connections.Email.IMAP.Server+":"+strconv.FormatInt(int64(context.Config.Connections.Email.IMAP.Port), 10), nil)
+	} else {
+		c, err = imap.Dial(context.Config.Connections.Email.IMAP.Server + ":" + strconv.FormatInt(int64(context.Config.Connections.Email.IMAP.Port), 10))
+	}
+	if err != nil || c == nil || c.Data == nil {
+		panic(err)
+	}
 
 	// Print server greeting (first response in the unilateral server data queue)
 	fmt.Println("IMAP Server says hello:", c.Data[0].Info)
@@ -84,6 +92,9 @@ func RunLoop() {
 
 	// List all top-level mailboxes, wait for the command to finish
 	cmd, _ = imap.Wait(c.List("", "%"))
+	if cmd == nil {
+		return
+	}
 
 	// Print mailbox information
 	fmt.Println("\nTop-level mailboxes:")
