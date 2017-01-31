@@ -20,9 +20,11 @@
          <label for="recipient">Recipient name (individual or organization)</label>
          {{input type="text" value=recipient id="recipient" class="form-control" placeholder="Recipient name (individual or organization)"}}
          <br/>
+         {{#if (eq isMicroBudget false)}}
          <label for="recipient2">For grants from 2000€: Second recipient/collaborator in another EU country</label>
          {{input type="text" value=recipient2 id="recipient2" class="form-control" placeholder="For small grants: Collaborator in second EU country"}}
          <br/>
+         {{/if}}
          <label for="contact">Contact email address for this proposal (grantee) &mdash; only visible for RFF staff</label>
          {{input type="text" value=contact id="contact" class="form-control" placeholder="Recipient contact information"}}
          <br/>
