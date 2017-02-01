@@ -164,8 +164,8 @@ func SendProposalStarted(proposal db.Proposal) {
 	}
 
 	m := gomail.NewMessage()
-	m.SetAddressHeader("From", context.Config.Connections.Email.Mailman.Address, context.Config.Connections.Email.Mailman.Name)
-	m.SetAddressHeader("To", context.Config.Connections.Email.Mailman.Address, context.Config.Connections.Email.Mailman.Name)
+	m.SetAddressHeader("From", settings.Connections.Email.Mailman.Address, settings.Connections.Email.Mailman.Name)
+	m.SetAddressHeader("To", settings.Connections.Email.Mailman.Address, settings.Connections.Email.Mailman.Name)
 
 	var buf bytes.Buffer
 	t := template.Must(template.New("proposal_started_subject").Parse(tmpl.Subject))
