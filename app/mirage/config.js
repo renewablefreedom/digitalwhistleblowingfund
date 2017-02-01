@@ -1,6 +1,6 @@
 export default function() {
 
-    this.urlPrefix='http://localhost:9999';
+    this.urlPrefix='https://grantsapi.digitalrights.fund/';
     this.namespace='/v1';
 
     this.passthrough('/sessions');
@@ -75,7 +75,7 @@ export default function() {
   */
 
   // this.urlPrefix = '';    // make this `http://localhost:8080`, for example, if your API is on a different server
-  // this.namespace = '';    // make this `api`, for example, if your API is namespaced
+  this.namespace = 'https://grantsapi.digitalrights.fund/';    // make this `api`, for example, if your API is namespaced
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
   /*
