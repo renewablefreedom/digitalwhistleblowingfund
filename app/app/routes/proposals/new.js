@@ -14,7 +14,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
      setupController(controller, models) {
        controller.set('budget', models.budget);
-       controller.set('contact', this.get('currentUser').get('user').get('email'));
+//       controller.set('contact', this.get('currentUser').get('user').get('email'));
        controller.set('errorMessage', '');
        controller.set('responseMessage', '');
        controller.set('progressMessage', '');
