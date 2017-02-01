@@ -73,10 +73,12 @@ func SendInvitation(user *db.User) {
 		t := template.Must(template.New("invitation_text").Parse(tmpl.Text))
 		return t.Execute(w, th)
 	})
+	/*TODO: if HTML in template is empty, do not write html content
+
 	m.AddAlternativeWriter("text/html", func(w io.Writer) error {
-		t := template.Must(template.New("invitation_html").Parse(tmpl.HTML))
+	t := template.Must(template.New("invitation_html").Parse(tmpl.HTML))
 		return t.Execute(w, th)
-	})
+	})*/
 
 	d := gomail.NewDialer(settings.Connections.Email.SMTP.Server, settings.Connections.Email.SMTP.Port,
 		settings.Connections.Email.SMTP.User, settings.Connections.Email.SMTP.Password)
@@ -107,10 +109,11 @@ func SendModerationRequest(proposal *db.Proposal) {
 		t := template.Must(template.New("moderation_proposal_text").Parse(tmpl.Text))
 		return t.Execute(w, th)
 	})
+	/*TODO
 	m.AddAlternativeWriter("text/html", func(w io.Writer) error {
 		t := template.Must(template.New("moderation_proposal_html").Parse(tmpl.HTML))
 		return t.Execute(w, th)
-	})
+	})*/
 
 	d := gomail.NewDialer(settings.Connections.Email.SMTP.Server, settings.Connections.Email.SMTP.Port,
 		settings.Connections.Email.SMTP.User, settings.Connections.Email.SMTP.Password)
@@ -144,10 +147,11 @@ func SendProposalAccepted(user *db.User, proposal *db.Proposal) {
 		t := template.Must(template.New("proposal_accepted_text").Parse(tmpl.Text))
 		return t.Execute(w, th)
 	})
+	/*TODO
 	m.AddAlternativeWriter("text/html", func(w io.Writer) error {
 		t := template.Must(template.New("proposal_accepted_html").Parse(tmpl.HTML))
 		return t.Execute(w, th)
-	})
+	})*/
 
 	d := gomail.NewDialer(settings.Connections.Email.SMTP.Server, settings.Connections.Email.SMTP.Port,
 		settings.Connections.Email.SMTP.User, settings.Connections.Email.SMTP.Password)
@@ -178,10 +182,11 @@ func SendProposalStarted(proposal db.Proposal) {
 		t := template.Must(template.New("proposal_started_text").Parse(tmpl.Text))
 		return t.Execute(w, th)
 	})
+	/*TODO
 	m.AddAlternativeWriter("text/html", func(w io.Writer) error {
 		t := template.Must(template.New("proposal_started_html").Parse(tmpl.HTML))
 		return t.Execute(w, th)
-	})
+	})*/
 
 	d := gomail.NewDialer(settings.Connections.Email.SMTP.Server, settings.Connections.Email.SMTP.Port,
 		settings.Connections.Email.SMTP.User, settings.Connections.Email.SMTP.Password)
