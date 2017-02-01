@@ -28,11 +28,14 @@
          <label for="contact">Contact email address for this proposal (grantee) &mdash; only visible for RFF staff</label>
          {{input type="text" value=contact id="contact" class="form-control" placeholder="Recipient contact information"}}
          <br/>
-         <label from="startdate">When do you want the voting on this proposal to begin? (micro: daily, runtime 14 days; small: every 2 months for 2 weeks)</label>
+         <label for="finisheddate">When do you expect the activities associated with this proposal to be over? When should we reach out for a report?</label>
+         {{bootstrap-datepicker id="enddaypicker" value=finisheddate id="finisheddate" startDate=minimumProposalStartDate format="yyyy/mm/dd" autoclose=true class="form-control" placeholder="Expected end date"}}
+		 <br/>
+         <label for="startdate">When do you want the voting on this proposal to begin? (micro: daily, runtime 14 days; small: every 2 months for 2 weeks)</label>
          {{#if isMicroBudget}}
-         {{bootstrap-datepicker id="daypicker" value=startdate startDate=minimumProposalStartDate format="yyyy/mm/dd" autoclose=true class="form-control" placeholder="Start date of the proposal vote"}}
+         {{bootstrap-datepicker id="daypicker" value=startdate id="startdate" startDate=minimumProposalStartDate format="yyyy/mm/dd" autoclose=true class="form-control" placeholder="Start date of the proposal vote"}}
          {{else}}
-         {{bootstrap-datepicker id="monthpicker" value=startdate startDate=minimumProposalStartDate format="yyyy/mm" minViewMode=1 autoclose=true class="form-control" placeholder="Which month to run this proposal in"}}
+         {{bootstrap-datepicker id="monthpicker" value=startdate id="startdate" startDate=minimumProposalStartDate format="yyyy/mm" minViewMode=1 autoclose=true class="form-control" placeholder="Which month to run this proposal in"}}
          {{/if}}
       </div>
     </div>
