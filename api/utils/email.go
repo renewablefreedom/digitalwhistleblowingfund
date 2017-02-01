@@ -131,7 +131,9 @@ func SendProposalAccepted(user *db.User, proposal *db.Proposal) {
 
 	m := gomail.NewMessage()
 	m.SetHeader("From", settings.Connections.Email.ReplyTo)
-	m.SetHeader("To", settings.Connections.Email.AdminEmail)
+	m.SetHeader("To", proposal.Contact)
+	//TODO replace hardedcoded address by config values
+    m.SetAddressHeader("Cc", "grants@digitalrights.fund", "Digital Rights Fund")
 
 	var buf bytes.Buffer
 	t := template.Must(template.New("proposal_accepted_subject").Parse(tmpl.Subject))
