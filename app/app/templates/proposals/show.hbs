@@ -42,9 +42,7 @@
       {{/if}}
     {{else}}
         {{#if (eq proposal.ended false)}}
-            {{#if (eq proposal.started true) (if (eq currentUser.user.id proposal.user.id))}}
-                {{#link-to "proposals.edit" proposal.id tagName="button" class="btn btn-primary btn-lg btn-block"}}Edit proposal{{/link-to}}
-            {{else}}
+            {{#if (not-eq currentUser.user.id proposal.user.id)}}
                 {{#if (eq currentUserVoted true)}}
                     You've voted against this proposal!
                 {{else}}
