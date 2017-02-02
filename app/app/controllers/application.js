@@ -12,5 +12,10 @@ export default Ember.Controller.extend({
         this.store.unloadAll('proposal');
         this.get('session').invalidate();
       }
-    }
+    },
+
+    selfupdate: Ember.inject.service(),
+    willInitSelfUpdate: function() {
+      this.get('selfupdate').watchUpdates();
+    }.on('init')
 });

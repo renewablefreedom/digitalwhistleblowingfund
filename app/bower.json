@@ -6,6 +6,7 @@
     "moment": "^2.17.1",
     "bootstrap-datepicker": "^1.6.4",
     "moment-timezone": "^0.5.11",
-    "dom-ruler": "0.2.4"
+    "dom-ruler": "0.2.4",
+    "jquery-mockjax": "^2.0.1"
   }
 }
