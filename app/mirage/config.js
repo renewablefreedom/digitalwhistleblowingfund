@@ -1,6 +1,6 @@
 export default function() {
 
-    this.urlPrefix='https://grantsapi.digitalrights.fund/';
+    this.urlPrefix='https://grantsapi.digitalrights.fund';
     this.namespace='/v1';
 
     this.passthrough('/sessions');
