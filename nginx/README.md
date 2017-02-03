@@ -17,6 +17,11 @@ to reflect the latest developments, it is merely a snapshot.
 * LetsEncrypt ACME
 * GZIP Compression Optimization
 
+## :warning: WARNING :warning:
+
+* Sets expiry of many files to maximum, because this works well for EmberJS; this is a terrible idea in many other cases
+* HSTS Preload is enabled in this configuration. You need to educate yourself and think hard whether you want that for your own site(s). [This is dangerous.](https://scotthelme.co.uk/death-by-copy-paste/)
+
 ## TODO
 
 * Content-Security-Policy
