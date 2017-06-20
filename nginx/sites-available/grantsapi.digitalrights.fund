@@ -1,6 +1,6 @@
 server {
-        listen 443 http2;
-        listen [::]:443 http2;
+        listen 443 ssl http2;
+        listen [::]:443 ssl http2;
         ssl_certificate /etc/letsencrypt/live/grantsapi.digitalrights.fund/fullchain.pem;
         ssl_certificate_key /etc/letsencrypt/live/grantsapi.digitalrights.fund/privkey.pem;
         include /etc/nginx/snippets/ssl-configuration.conf;
