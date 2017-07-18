@@ -21,7 +21,24 @@ func (context *PollyContext) remainingLargeGrantPeriods(month uint) uint {
 }
 
 func (context *PollyContext) sumAcceptedLargeGrants() uint {
-	return 0
+	proposals, _ := context.LoadAllProposals()
+
+	i := uint(0)
+	for _, p := range proposals {
+		if !p.Ended(context) {
+			continue
+		}
+		if p.Value < uint64(context.Config.App.Proposals.SmallGrantValueThreshold) {
+			continue
+		}
+		if !p.Accepted(context) {
+			continue
+		}
+
+		i += uint(p.Value)
+	}
+
+	return i
 }
 
 func (context *PollyContext) sumAcceptedSmallGrants(month uint) uint {
@@ -60,7 +77,11 @@ func (context *PollyContext) remainingSmallGrantValue(month uint) uint {
 
 // RemainingSmallGrantThisMonth returns the total available budget for small grants this month
 func (context *PollyContext) RemainingSmallGrantThisMonth(month uint) uint {
-	return context.remainingSmallGrantValue(month) / context.remainingMonths(month)
+	remmonths := context.remainingMonths(month)
+	if remmonths < 1 {
+		remmonths = 1
+	}
+	return context.remainingSmallGrantValue(month) / remmonths
 }
 
 // SmallGrantMaxValue returns the max available value for a micro budget
@@ -71,7 +92,12 @@ func (context *PollyContext) SmallGrantMaxValue(month uint) uint {
 	fmt.Println("sum-SMALL:", context.sumAcceptedSmallGrants(0))
 	fmt.Println("sum-SMALL-MONTH:", context.sumAcceptedSmallGrants(month)) */
 
-	i := int(context.remainingSmallGrantValue(month)/context.remainingMonths(month)) -
+	remmonths := context.remainingMonths(month)
+	if remmonths < 1 {
+		remmonths = 1
+	}
+
+	i := int(context.remainingSmallGrantValue(month)/remmonths) -
 		int(context.sumAcceptedSmallGrants(month))
 
 	// fmt.Println("smallgrantmax:", i)
