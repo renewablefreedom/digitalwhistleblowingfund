@@ -32,6 +32,10 @@
          {{bootstrap-datepicker id="enddaypicker" value=finisheddate id="finisheddate" startDate=minimumProposalStartDate format="yyyy/mm/dd" autoclose=true class="form-control" placeholder="Expected end date"}}
 		 <br/>
          <label for="startdate">When do you want the voting on this proposal to begin? (micro: daily, runtime 14 days; small: every 2 months for 2 weeks)</label>
+         {{#if (eq currentUser.user.id "1")}}
+         {{input type="text" value=realvalue class="form-control" placeholder="How much money actually got transferred"}}
+         <br/>
+         {{/if}}
          {{#if isMicroBudget}}
          {{bootstrap-datepicker id="daypicker" value=startdate id="startdate" startDate=minimumProposalStartDate format="yyyy/mm/dd" autoclose=true class="form-control" placeholder="Start date of the proposal vote"}}
          {{else}}

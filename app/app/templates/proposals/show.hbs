@@ -20,8 +20,7 @@
 
     <div class="col-xs-2 col-xs-offset-1 col-sm-2 col-sm-offset-1 col-md-1 col-md-offset-2 align-middle text-center">
       <br/>
-      <h2><b>{{proposal.votes}}</b></h2>
-      Votes
+      <h2><b>{{proposal.votes}}</b></h2> Votes
     </div>
   </div>
 
@@ -40,22 +39,33 @@
         <br/>
         <button {{action 'moderate' proposal.id}} class="btn btn-primary btn-lg btn-block">Allow proposal</button>
       {{/if}}
+      {{#link-to "proposals.edit" proposal.id tagName="button" class="btn btn-primary btn-lg btn-block" }}Edit proposal{{/link-to}}
     {{else}}
-        {{#if (eq proposal.ended false)}}
-            {{#if (eq currentUser.user.id proposal.user.id)}}
-                {{#if (eq proposal_has_started false)}}
-                    {{#link-to "proposals.edit" proposal.id tagName="button" class="btn btn-primary btn-lg btn-block"}}Edit proposal{{/link-to}}
-                {{/if}}
-            {{else}}
-                {{#if (eq currentUserVoted true)}}
-                    You've voted against this proposal!
-                {{else}}
-                    <button {{action 'vote'}} class="btn btn-primary btn-lg btn-block">Vote against this proposal</button>
-                {{/if}}
-            {{/if}}
+      {{#if (eq proposal.ended false)}}
+        {{#if (eq currentUser.user.id proposal.user.id)}}
+          {{#if (eq proposal_has_started false)}}
+            {{#link-to "proposals.edit" proposal.id tagName="button" class="btn btn-primary btn-lg btn-block" }}Edit proposal{{/link-to}}
+          {{/if}}
         {{else}}
-            This proposal has {{#if (eq proposal.accepted false)}}<b>not</b> {{/if}} been accepted!
+          {{#if (not-eq currentUserVoted 0)}}
+            {{#if (eq currentUserVoted 1)}}
+              You've voted for this proposal!
+            {{else}}
+              You've voted against this proposal!
+            {{/if}}
+          {{else}}
+            {{#if (eq proposal.granttype "large")}}
+              <button {{action 'vote'}} class="btn btn-primary btn-lg btn-block">Vote for this proposal</button>
+            {{else}}
+              <button {{action 'vote'}} class="btn btn-primary btn-lg btn-block">Vote for this proposal</button>
+              <button {{action 'voteDown'}} class="btn btn-primary btn-lg btn-block">Vote against this proposal</button>
+            {{/if}}
+          {{/if}}
         {{/if}}
+      {{else}}
+        This proposal has
+        {{#if (eq proposal.accepted false)}}<b>not</b> {{/if}} been accepted!
+      {{/if}}
     {{/if}}
   </div>
 </div>

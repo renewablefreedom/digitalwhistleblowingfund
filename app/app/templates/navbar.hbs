@@ -27,7 +27,7 @@
               {{#link-to 'admin' tagName="li"}}<a href="">Admin</a>{{/link-to}}
             {{/if}}
             {{#if session.isAuthenticated}}
-              <li><a href="" {{action 'invalidateSession'}}><span class="glyphicon glyphicon-log-in"></span> &nbsp;Logout
+              <li><a href="#" {{action 'invalidateSession'}}><span class="glyphicon glyphicon-log-in"></span> &nbsp;Logout
                   {{#if currentUser.user}}
                     ({{currentUser.user.email}})
                   {{/if}}

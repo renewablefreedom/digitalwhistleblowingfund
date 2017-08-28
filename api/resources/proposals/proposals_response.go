@@ -27,6 +27,7 @@ type proposalInfoResponse struct {
 	Recipient    string    `json:"recipient"`
 	Recipient2   string    `json:"recipient2"`
 	Value        uint64    `json:"value"`
+	RealValue    uint64    `json:"realvalue"`
 	GrantType    string    `json:"granttype"`
 	URL          string    `json:"url"`
 	Starts       time.Time `json:"starts"`
@@ -36,6 +37,7 @@ type proposalInfoResponse struct {
 	Accepted     bool      `json:"accepted"`
 	Moderated    bool      `json:"moderated"`
 	Votes        uint64    `json:"votes"`
+	Vetos        uint64    `json:"vetos"`
 }
 
 // Init a new response
@@ -76,11 +78,13 @@ func prepareProposalResponse(context smolder.APIContext, proposal *db.Proposal) 
 		Recipient:    proposal.Recipient,
 		Recipient2:   proposal.Recipient2,
 		Value:        proposal.Value,
+		RealValue:    proposal.RealValue,
 		Starts:       proposal.Starts,
 		Ends:         proposal.Ends(ctx),
 		FinishedDate: proposal.FinishedDate,
 		Ended:        proposal.Ended(ctx),
 		Votes:        proposal.Votes,
+		Vetos:        proposal.Vetos,
 		Accepted:     proposal.Accepted(ctx),
 		Moderated:    proposal.Moderated,
 		URL:          utils.BuildURL(ctx.Config.Web.BaseURL, *proposal),
