@@ -1,12 +1,12 @@
 server {
         listen 443 ssl http2;
         listen [::]:443 ssl http2;
-        ssl_certificate /etc/letsencrypt/live/grantsapi.digitalrights.fund/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/grantsapi.digitalrights.fund/privkey.pem;
+        ssl_certificate /etc/letsencrypt/live/grantsapi.whistleblowingfund.org/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/grantsapi.whistleblowingfund.org/privkey.pem;
         include /etc/nginx/snippets/ssl-configuration.conf;
         include /etc/nginx/snippets/sanitize-logs-per-server.conf;
 
-        server_name grantsapi.digitalrights.fund;
+        server_name grantsapi.whistleblowingfund.org;
 
 	location /v1/ {
 		proxy_pass http://127.0.0.1:9999/v1/;

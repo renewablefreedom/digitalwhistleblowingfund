@@ -1,15 +1,15 @@
 server {
-        listen 443 ssl http2 default_server;
-        listen [::]:443 ssl http2 default_server;
-        ssl_certificate /etc/letsencrypt/live/grants.digitalrights.fund/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/grants.digitalrights.fund/privkey.pem;
+        listen 443 ssl http2;
+        listen [::]:443 ssl http2;
+        ssl_certificate /etc/letsencrypt/live/grants.whistleblowingfund.org/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/grants.whistleblowingfund.org/privkey.pem;
         include /etc/nginx/snippets/ssl-configuration.conf;
 
         include /etc/nginx/snippets/sanitize-logs-per-server.conf;
 
         root /home/polly/polly/app/dist/;
         index index.html index.htm;
-        server_name grants.digitalrights.fund;
+        server_name grants.whistleblowingfund.org;
 
         location / {
 		try_files $uri $uri/ /index.html?/$request_uri;
