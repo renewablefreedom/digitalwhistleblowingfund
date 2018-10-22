@@ -12,14 +12,10 @@
 
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav">
-            <li>{{link-to 'Details' 'details'}}</li>
-            <li>{{link-to 'Contact' 'contact'}}</li>
+            <li><a href="https://www.whistleblowingfund.org/">Website</a></li>
+            <li>{{#link-to 'proposals.new'}}<span class="glyphicon glyphicon-circle-arrow-right"></span> Submit New Proposal{{/link-to}}</li>
             {{#if session.isAuthenticated}}
-            <li>{{link-to 'How it works' 'how-it-works'}}</li>
             <li>{{link-to 'Proposals' 'proposals'}}</li>
-            {{#if (not-eq currentUser.user.id "1")}}
-              <li>{{#link-to 'proposals.new'}}<span class="glyphicon glyphicon-circle-arrow-right"></span> Submit New Proposal{{/link-to}}</li>
-            {{/if}}
             {{/if}}
       </ul>
       <ul class="nav navbar-nav navbar-right">

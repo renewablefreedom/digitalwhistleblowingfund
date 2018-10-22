@@ -7,7 +7,6 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('about');
   this.route('admin');
   this.route('proposals', function() {
     this.route('new');
@@ -21,9 +20,6 @@ Router.map(function() {
   });
   this.route('login');
   this.route('signup', { path: '/signup/:token' });
-  this.route('contact');
-  this.route('how-it-works');
-  this.route('details');
 });
 
 export default Router;
