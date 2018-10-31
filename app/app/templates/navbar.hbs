@@ -12,24 +12,24 @@
 
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav">
-            <li>{{#link-to 'proposals.new'}}<span class="glyphicon glyphicon-circle-arrow-right"></span> Submit New Proposal{{/link-to}}</li>
-            {{#if session.isAuthenticated}}
-            <li>{{#link-to 'proposals'}}<span class="glyphicon glyphicon-th-list"></span> View Proposals{{/link-to}}</li>
-            {{/if}}
+        <li>{{#link-to 'new'}}<span class="glyphicon glyphicon-circle-arrow-right"></span> Submit New Proposal{{/link-to}}</li>
+        {{#if session.isAuthenticated}}
+          <li>{{#link-to 'proposals'}}<span class="glyphicon glyphicon-th-list"></span> View Proposals{{/link-to}}</li>
+        {{/if}}
       </ul>
       <ul class="nav navbar-nav navbar-right">
-            {{#if (eq currentUser.user.id "1")}}
-              {{#link-to 'admin' tagName="li"}}<a href="">Admin</a>{{/link-to}}
-            {{/if}}
-            {{#if session.isAuthenticated}}
-              <li><a href="#" {{action 'invalidateSession'}}><span class="glyphicon glyphicon-log-in"></span> &nbsp;Logout
-                  {{#if currentUser.user}}
-                    ({{currentUser.user.email}})
-                  {{/if}}
-              </a></li>
-            {{else}}
-              <li>{{#link-to 'login'}}<span class="glyphicon glyphicon-log-out"></span> Login{{/link-to}}</li>
-            {{/if}}
+        {{#if (eq currentUser.user.id "1")}}
+          {{#link-to 'admin' tagName="li"}}<a href="">Admin</a>{{/link-to}}
+        {{/if}}
+        {{#if session.isAuthenticated}}
+          <li><a href="#" {{action 'invalidateSession'}}><span class="glyphicon glyphicon-log-in"></span> &nbsp;Logout
+              {{#if currentUser.user}}
+                ({{currentUser.user.email}})
+              {{/if}}
+            </a></li>
+        {{else}}
+          <li>{{#link-to 'login'}}<span class="glyphicon glyphicon-log-out"></span> Login{{/link-to}}</li>
+        {{/if}}
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
