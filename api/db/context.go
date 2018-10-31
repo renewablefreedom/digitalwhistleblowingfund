@@ -6,10 +6,10 @@ import (
 	"time"
 
 	restful "github.com/emicklei/go-restful"
-	"github.com/muesli/polly/api/config"
+	"github.com/muesli/digitalwhistleblowingfund/api/config"
 
-	log "github.com/sirupsen/logrus"
 	"github.com/muesli/smolder"
+	log "github.com/sirupsen/logrus"
 )
 
 // PollyContext is polly's central context

@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/muesli/polly/api/db"
-	"github.com/muesli/polly/api/utils"
+	"github.com/muesli/digitalwhistleblowingfund/api/db"
+	"github.com/muesli/digitalwhistleblowingfund/api/utils"
 
 	"github.com/emicklei/go-restful"
 	"github.com/muesli/smolder"
@@ -69,15 +69,29 @@ func (r *ProposalResource) Put(context smolder.APIContext, data interface{}, req
 	}
 
 	proposal.Title = pps.Proposal.Title
+	proposal.Applicant = pps.Proposal.Applicant
+	proposal.Applicantdescription = pps.Proposal.Applicantdescription
+	proposal.Referrerorganization = pps.Proposal.Referrerorganization
+	proposal.Referrercontact = pps.Proposal.Referrercontact
 	proposal.Description = pps.Proposal.Description
+	proposal.Socialgoals = pps.Proposal.Socialgoals
 	proposal.Activities = pps.Proposal.Activities
+	proposal.Geofocus = pps.Proposal.Geofocus
+	proposal.Laws = pps.Proposal.Laws
+	proposal.Whistleblowingtype = pps.Proposal.Whistleblowingtype
+	proposal.Motivations = pps.Proposal.Motivations
+	proposal.Partners = pps.Proposal.Partners
+	proposal.Board = pps.Proposal.Board
+	proposal.Communication = pps.Proposal.Communication
+	proposal.Information = pps.Proposal.Information
+	proposal.Usage = pps.Proposal.Usage
+	proposal.Dependency = pps.Proposal.Dependency
+	proposal.Sustain = pps.Proposal.Sustain
 	proposal.Contact = pps.Proposal.Contact
 	proposal.Recipient = pps.Proposal.Recipient
-	proposal.Recipient2 = pps.Proposal.Recipient2
 	proposal.Value = pps.Proposal.Value
 	proposal.RealValue = pps.Proposal.RealValue
 	// proposal.Starts = pps.Proposal.Starts
-	// proposal.FinishedDate = pps.Proposal.FinishedDate
 
 	if auth.(db.User).ID == 1 {
 		if !proposal.Moderated && pps.Proposal.Moderated {

@@ -12,8 +12,8 @@ import (
 	"github.com/muesli/gomail"
 	"github.com/mxk/go-imap/imap"
 
-	"github.com/muesli/polly/api/db"
-	"github.com/muesli/polly/api/utils"
+	"github.com/muesli/digitalwhistleblowingfund/api/db"
+	"github.com/muesli/digitalwhistleblowingfund/api/utils"
 )
 
 var (

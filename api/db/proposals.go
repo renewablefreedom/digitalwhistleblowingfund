@@ -1,28 +1,41 @@
 package db
 
 import (
-	"errors"
 	"time"
 )
 
 // Proposal represents the db schema of a proposal
 type Proposal struct {
-	ID           int64
-	UserID       int64
-	Title        string
-	Description  string
-	Activities   string
-	Contact      string
-	Recipient    string
-	Recipient2   string
-	Value        uint64
-	RealValue    uint64
-	Starts       time.Time
-	FinishedDate time.Time
-	Votes        uint64
-	Vetos        uint64
-	Moderated    bool
-	StartTrigger bool
+	ID                   int64
+	UserID               int64
+	Title                string
+	Applicant            string
+	Applicantdescription string
+	Referrerorganization string
+	Referrercontact      string
+	Description          string
+	Socialgoals          string
+	Activities           string
+	Geofocus             string
+	Laws                 string
+	Whistleblowingtype   string
+	Motivations          string
+	Partners             string
+	Board                string
+	Communication        string
+	Information          string
+	Usage                string
+	Dependency           string
+	Sustain              string
+	Contact              string
+	Recipient            string
+	Value                uint64
+	RealValue            uint64
+	Starts               time.Time
+	Votes                uint64
+	Vetos                uint64
+	Moderated            bool
+	StartTrigger         bool
 }
 
 // LoadProposalByID loads a proposal by ID from the database
@@ -32,8 +45,8 @@ func (context *PollyContext) LoadProposalByID(id int64) (Proposal, error) {
 		return proposal, ErrInvalidID
 	}
 
-	err := context.QueryRow("SELECT id, userid, title, description, activities, contact, recipient, recipient2, value, realvalue, starts, votes, vetos, moderated, started, finisheddate FROM proposals WHERE id = $1", id).
-		Scan(&proposal.ID, &proposal.UserID, &proposal.Title, &proposal.Description, &proposal.Activities, &proposal.Contact, &proposal.Recipient, &proposal.Recipient2, &proposal.Value, &proposal.RealValue, &proposal.Starts, &proposal.Votes, &proposal.Vetos, &proposal.Moderated, &proposal.StartTrigger, &proposal.FinishedDate)
+	err := context.QueryRow("SELECT id, userid, title, applicant, applicantdescription, referrerorganization, referrercontact, description, socialgoals, activities, geofocus, laws, whistleblowingtype, motivations, partners, board, communication, information, usage, dependency, sustain, contact, recipient, value, realvalue, starts, votes, vetos, moderated, started FROM proposals WHERE id = $1", id).
+		Scan(&proposal.ID, &proposal.UserID, &proposal.Title, &proposal.Applicant, &proposal.Applicantdescription, &proposal.Referrerorganization, &proposal.Referrercontact, &proposal.Description, &proposal.Socialgoals, &proposal.Activities, &proposal.Geofocus, &proposal.Laws, &proposal.Whistleblowingtype, &proposal.Motivations, &proposal.Partners, &proposal.Board, &proposal.Communication, &proposal.Information, &proposal.Usage, &proposal.Dependency, &proposal.Sustain, &proposal.Contact, &proposal.Recipient, &proposal.Value, &proposal.RealValue, &proposal.Starts, &proposal.Votes, &proposal.Vetos, &proposal.Moderated, &proposal.StartTrigger)
 	return proposal, err
 }
 
@@ -53,7 +66,7 @@ func (context *PollyContext) GetProposalByID(id int64) (Proposal, error) {
 func (context *PollyContext) LoadAllProposals() ([]Proposal, error) {
 	proposals := []Proposal{}
 
-	rows, err := context.Query("SELECT id, userid, title, description, activities, contact, recipient, recipient2, value, realvalue, starts, votes, vetos, moderated, started, finisheddate FROM proposals ORDER BY starts ASC")
+	rows, err := context.Query("SELECT id, userid, title, applicant, applicantdescription, referrerorganization, referrercontact, description, socialgoals, activities, geofocus, laws, whistleblowingtype, motivations, partners, board, communication, information, usage, dependency, sustain, contact, recipient, value, realvalue, starts, votes, vetos, moderated, started FROM proposals ORDER BY starts ASC")
 	if err != nil {
 		return proposals, err
 	}
@@ -61,7 +74,7 @@ func (context *PollyContext) LoadAllProposals() ([]Proposal, error) {
 	defer rows.Close()
 	for rows.Next() {
 		proposal := Proposal{}
-		err = rows.Scan(&proposal.ID, &proposal.UserID, &proposal.Title, &proposal.Description, &proposal.Activities, &proposal.Contact, &proposal.Recipient, &proposal.Recipient2, &proposal.Value, &proposal.RealValue, &proposal.Starts, &proposal.Votes, &proposal.Vetos, &proposal.Moderated, &proposal.StartTrigger, &proposal.FinishedDate)
+		err = rows.Scan(&proposal.ID, &proposal.UserID, &proposal.Title, &proposal.Applicant, &proposal.Applicantdescription, &proposal.Referrerorganization, &proposal.Referrercontact, &proposal.Description, &proposal.Socialgoals, &proposal.Activities, &proposal.Geofocus, &proposal.Laws, &proposal.Whistleblowingtype, &proposal.Motivations, &proposal.Partners, &proposal.Board, &proposal.Communication, &proposal.Information, &proposal.Usage, &proposal.Dependency, &proposal.Sustain, &proposal.Contact, &proposal.Recipient, &proposal.Value, &proposal.RealValue, &proposal.Starts, &proposal.Votes, &proposal.Vetos, &proposal.Moderated, &proposal.StartTrigger)
 		if err != nil {
 			return proposals, err
 		}
@@ -74,7 +87,8 @@ func (context *PollyContext) LoadAllProposals() ([]Proposal, error) {
 
 // Update a proposal in the database
 func (proposal *Proposal) Update(context *PollyContext) error {
-	_, err := context.Exec("UPDATE proposals SET title = $1, description = $2, activities = $3, contact = $4, recipient = $5, recipient2 = $6, value = $7, realvalue = $8, starts = $9, moderated = $10, started = $11, finisheddate = $12 WHERE id = $13", proposal.Title, proposal.Description, proposal.Activities, proposal.Contact, proposal.Recipient, proposal.Recipient2, proposal.Value, proposal.RealValue, proposal.Starts, proposal.Moderated, proposal.StartTrigger, proposal.FinishedDate, proposal.ID)
+	_, err := context.Exec("UPDATE proposals SET title = $1, applicant = $2, applicantdescription = $3, referrerorganization = $4, referrercontact = $5, description = $6, socialgoals = $7, activities = $8, geofocus = $9, laws = $10, whistleblowingtype = $11, motivations = $12, partners = $13, board = $14, communication = $15, information = $16, usage = $17, dependency = $18, sustain = $19, contact = $20, recipient = $21, value = $22, realvalue = $23, starts = $24, moderated = $25, started = $26 WHERE id = $27",
+		proposal.Title, proposal.Applicant, proposal.Applicantdescription, proposal.Referrerorganization, proposal.Referrercontact, proposal.Description, proposal.Socialgoals, proposal.Activities, proposal.Geofocus, proposal.Laws, proposal.Whistleblowingtype, proposal.Motivations, proposal.Partners, proposal.Board, proposal.Communication, proposal.Information, proposal.Usage, proposal.Dependency, proposal.Sustain, proposal.Contact, proposal.Recipient, proposal.Value, proposal.RealValue, proposal.Starts, proposal.Moderated, proposal.StartTrigger, proposal.ID)
 	if err != nil {
 		panic(err)
 	}
@@ -85,29 +99,32 @@ func (proposal *Proposal) Update(context *PollyContext) error {
 
 // Save a proposal to the database
 func (proposal *Proposal) Save(context *PollyContext) error {
-	if proposal.Value > uint64(context.Config.App.Proposals.MaxGrantValue) {
-		return errors.New("Grant value is too high")
-	}
-
-	if proposal.Value < uint64(context.Config.App.Proposals.SmallGrantValueThreshold) {
-		if proposal.Value > uint64(context.SmallGrantMaxValue(uint(proposal.Ends(context).Month()))) {
-			return errors.New("Proposal value is too high for this polling period")
+	/*
+		if proposal.Value > uint64(context.Config.App.Proposals.MaxGrantValue) {
+			return errors.New("Grant value is too high")
 		}
 
-		if proposal.Starts.Before(time.Now()) {
-			return errors.New("Invalid start date")
-		}
-	} else {
-		largeGrantStartMonth := ((int(proposal.Starts.Month()) + int(context.Config.App.Proposals.StartMonth)) % int(context.Config.App.Proposals.GrantIntervalMonths)) + int(proposal.Starts.Month())
-		startDate := time.Date(proposal.Starts.Year(), time.Month(largeGrantStartMonth), 1, 0, 0, 0, 0, time.UTC).AddDate(0, 1, -1)
-		proposal.Starts = time.Date(startDate.Year(), startDate.Month(), startDate.Day(), 12, 0, 0, 0, time.UTC)
+		if proposal.Value < uint64(context.Config.App.Proposals.SmallGrantValueThreshold) {
+			if proposal.Value > uint64(context.SmallGrantMaxValue(uint(proposal.Ends(context).Month()))) {
+				return errors.New("Proposal value is too high for this polling period")
+			}
 
-		if proposal.Starts.Before(time.Now()) {
-			return errors.New("Invalid start date")
-		}
-	}
+			if proposal.Starts.Before(time.Now()) {
+				return errors.New("Invalid start date")
+			}
+		} else {
+			largeGrantStartMonth := ((int(proposal.Starts.Month()) + int(context.Config.App.Proposals.StartMonth)) % int(context.Config.App.Proposals.GrantIntervalMonths)) + int(proposal.Starts.Month())
+			startDate := time.Date(proposal.Starts.Year(), time.Month(largeGrantStartMonth), 1, 0, 0, 0, 0, time.UTC).AddDate(0, 1, -1)
+			proposal.Starts = time.Date(startDate.Year(), startDate.Month(), startDate.Day(), 12, 0, 0, 0, time.UTC)
 
-	err := context.QueryRow("INSERT INTO proposals (userid, title, description, activities, contact, recipient, recipient2, value, realvalue, starts, finisheddate) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id", proposal.UserID, proposal.Title, proposal.Description, proposal.Activities, proposal.Contact, proposal.Recipient, proposal.Recipient2, proposal.Value, proposal.Value, proposal.Starts, proposal.FinishedDate).Scan(&proposal.ID)
+			if proposal.Starts.Before(time.Now()) {
+				return errors.New("Invalid start date")
+			}
+		}
+	*/
+
+	err := context.QueryRow("INSERT INTO proposals (userid, title, applicant, applicantdescription, referrerorganization, referrercontact, description, socialgoals, activities, geofocus, laws, whistleblowingtype, motivations, partners, board, communication, information, usage, dependency, sustain, contact, recipient, value, realvalue, starts) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) RETURNING id",
+		proposal.UserID, proposal.Title, proposal.Applicant, proposal.Applicantdescription, proposal.Referrerorganization, proposal.Referrercontact, proposal.Description, proposal.Socialgoals, proposal.Activities, proposal.Geofocus, proposal.Laws, proposal.Whistleblowingtype, proposal.Motivations, proposal.Partners, proposal.Board, proposal.Communication, proposal.Information, proposal.Usage, proposal.Dependency, proposal.Sustain, proposal.Contact, proposal.Recipient, proposal.Value, proposal.Value, proposal.Starts).Scan(&proposal.ID)
 	proposalsCache.Delete(proposal.ID)
 	return err
 }
@@ -152,6 +169,9 @@ func (proposal *Proposal) IsTopTwo(context *PollyContext) bool {
 // Accepted returns true if a proposal has finished and was accepted by poll
 func (proposal *Proposal) Accepted(context *PollyContext) bool {
 	if !proposal.Ended(context) {
+		return false
+	}
+	if context.Config.App.Proposals.ManualModeration {
 		return false
 	}
 	if proposal.Votes < uint64(context.Config.App.Proposals.SmallGrantVoteThreshold) {

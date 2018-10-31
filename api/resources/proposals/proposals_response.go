@@ -3,8 +3,8 @@ package proposals
 import (
 	"time"
 
-	"github.com/muesli/polly/api/db"
-	"github.com/muesli/polly/api/utils"
+	"github.com/muesli/digitalwhistleblowingfund/api/db"
+	"github.com/muesli/digitalwhistleblowingfund/api/utils"
 
 	"github.com/muesli/smolder"
 )
@@ -18,26 +18,40 @@ type ProposalResponse struct {
 }
 
 type proposalInfoResponse struct {
-	ID           int64     `json:"id"`
-	Title        string    `json:"title"`
-	Description  string    `json:"description"`
-	Activities   string    `json:"activities"`
-	User         int64     `json:"user"`
-	Contact      string    `json:"contact"`
-	Recipient    string    `json:"recipient"`
-	Recipient2   string    `json:"recipient2"`
-	Value        uint64    `json:"value"`
-	RealValue    uint64    `json:"realvalue"`
-	GrantType    string    `json:"granttype"`
-	URL          string    `json:"url"`
-	Starts       time.Time `json:"starts"`
-	Ends         time.Time `json:"ends"`
-	FinishedDate time.Time `json:"finished_date"`
-	Ended        bool      `json:"ended"`
-	Accepted     bool      `json:"accepted"`
-	Moderated    bool      `json:"moderated"`
-	Votes        uint64    `json:"votes"`
-	Vetos        uint64    `json:"vetos"`
+	ID                   int64     `json:"id"`
+	Title                string    `json:"title"`
+	Applicant            string    `json:"applicant"`
+	Applicantdescription string    `json:"applicantdescription"`
+	Referrerorganization string    `json:"referrerorganization"`
+	Referrercontact      string    `json:"referrercontact"`
+	Description          string    `json:"description"`
+	Socialgoals          string    `json:"socialgoals"`
+	Activities           string    `json:"activities"`
+	Geofocus             string    `json:"geofocus"`
+	Laws                 string    `json:"laws"`
+	Whistleblowingtype   string    `json:"whistleblowingtype"`
+	Motivations          string    `json:"motivations"`
+	Partners             string    `json:"partners"`
+	Board                string    `json:"board"`
+	Communication        string    `json:"communication"`
+	Information          string    `json:"information"`
+	Usage                string    `json:"usage"`
+	Dependency           string    `json:"dependency"`
+	Sustain              string    `json:"sustain"`
+	User                 int64     `json:"user"`
+	Contact              string    `json:"contact"`
+	Recipient            string    `json:"recipient"`
+	Value                uint64    `json:"value"`
+	RealValue            uint64    `json:"realvalue"`
+	GrantType            string    `json:"granttype"`
+	URL                  string    `json:"url"`
+	Starts               time.Time `json:"starts"`
+	Ends                 time.Time `json:"ends"`
+	Ended                bool      `json:"ended"`
+	Accepted             bool      `json:"accepted"`
+	Moderated            bool      `json:"moderated"`
+	Votes                uint64    `json:"votes"`
+	Vetos                uint64    `json:"vetos"`
 }
 
 // Init a new response
@@ -69,25 +83,39 @@ func (r *ProposalResponse) EmptyResponse() interface{} {
 func prepareProposalResponse(context smolder.APIContext, proposal *db.Proposal) proposalInfoResponse {
 	ctx := context.(*db.PollyContext)
 	resp := proposalInfoResponse{
-		ID:           proposal.ID,
-		Title:        proposal.Title,
-		Description:  proposal.Description,
-		Activities:   proposal.Activities,
-		User:         proposal.UserID,
-		Contact:      proposal.Contact,
-		Recipient:    proposal.Recipient,
-		Recipient2:   proposal.Recipient2,
-		Value:        proposal.Value,
-		RealValue:    proposal.RealValue,
-		Starts:       proposal.Starts,
-		Ends:         proposal.Ends(ctx),
-		FinishedDate: proposal.FinishedDate,
-		Ended:        proposal.Ended(ctx),
-		Votes:        proposal.Votes,
-		Vetos:        proposal.Vetos,
-		Accepted:     proposal.Accepted(ctx),
-		Moderated:    proposal.Moderated,
-		URL:          utils.BuildURL(ctx.Config.Web.BaseURL, *proposal),
+		ID:                   proposal.ID,
+		Title:                proposal.Title,
+		Applicant:            proposal.Applicant,
+		Applicantdescription: proposal.Applicantdescription,
+		Referrerorganization: proposal.Referrerorganization,
+		Referrercontact:      proposal.Referrercontact,
+		Description:          proposal.Description,
+		Socialgoals:          proposal.Socialgoals,
+		Activities:           proposal.Activities,
+		Geofocus:             proposal.Geofocus,
+		Laws:                 proposal.Laws,
+		Whistleblowingtype:   proposal.Whistleblowingtype,
+		Motivations:          proposal.Motivations,
+		Partners:             proposal.Partners,
+		Board:                proposal.Board,
+		Communication:        proposal.Communication,
+		Information:          proposal.Information,
+		Usage:                proposal.Usage,
+		Dependency:           proposal.Dependency,
+		Sustain:              proposal.Sustain,
+		User:                 proposal.UserID,
+		Contact:              proposal.Contact,
+		Recipient:            proposal.Recipient,
+		Value:                proposal.Value,
+		RealValue:            proposal.RealValue,
+		Starts:               proposal.Starts,
+		Ends:                 proposal.Ends(ctx),
+		Ended:                proposal.Ended(ctx),
+		Votes:                proposal.Votes,
+		Vetos:                proposal.Vetos,
+		Accepted:             proposal.Accepted(ctx),
+		Moderated:            proposal.Moderated,
+		URL:                  utils.BuildURL(ctx.Config.Web.BaseURL, *proposal),
 	}
 
 	if proposal.Value < uint64(ctx.Config.App.Proposals.SmallGrantValueThreshold) {

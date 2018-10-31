@@ -58,7 +58,7 @@ export default Ember.Controller.extend({
       const applicant = this.get('applicant');
       const applicantdescription = this.get('applicantdescription');
       const referrerorganization = this.get('referrerorganization');
-      const referrercontact = this.get('tireferrercontacttle');
+      const referrercontact = this.get('referrercontact');
       const description = this.get('description');
       const socialgoals = this.get('socialgoals');
       const activities = this.get('activities');

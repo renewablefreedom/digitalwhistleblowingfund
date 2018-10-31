@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/muesli/polly/api/config"
+	"github.com/muesli/digitalwhistleblowingfund/api/config"
 
 	"github.com/lib/pq"
 	"github.com/muesli/cache2go"
@@ -18,7 +18,7 @@ var (
 	pgDB   *sql.DB
 	pgConn config.PostgreSQLConnection
 
-	proposalsCache = cache2go.Cache("track")
+	proposalsCache = cache2go.Cache("proposals")
 	usersCache     = cache2go.Cache("user")
 
 	// ErrInvalidID is the error returned when encountering an invalid database ID
@@ -58,15 +58,29 @@ func GetDatabase() *sql.DB {
 				  id          	bigserial 	PRIMARY KEY,
 				  userid      	bigserial 	NOT NULL,
 				  title       	text      	NOT NULL,
+				  applicant		text      	NOT NULL,
+				  applicantdescription	text      	NOT NULL,
+				  referrerorganization	text      	NOT NULL,
+				  referrercontact		text      	NOT NULL,
 				  description	text      	NOT NULL,
+				  socialgoals	text      	NOT NULL,
 				  activities	text      	NOT NULL,
+				  geofocus		text      	NOT NULL,
+				  laws			text      	NOT NULL,
+				  whistleblowingtype	text      	NOT NULL,
+				  motivations			text      	NOT NULL,
+				  partners				text      	NOT NULL,
+				  board					text      	NOT NULL,
+				  communication			text      	NOT NULL,
+				  information			text      	NOT NULL,
+				  usage					text      	NOT NULL,
+				  dependency			text      	NOT NULL,
+				  sustain				text      	NOT NULL,
 				  contact		text      	NOT NULL,
 				  recipient		text		NOT NULL,
-				  recipient2	text,
 				  value			int			NOT NULL,
 				  realvalue		int			NOT NULL,
 				  starts		timestamp	NOT NULL,
-				  finisheddate	timestamp	NOT NULL,
 				  votes	      	int       	DEFAULT 0,
 				  vetos			int			DEFAULT 0,
 				  moderated     bool        DEFAULT false,

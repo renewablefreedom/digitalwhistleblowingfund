@@ -1,8 +1,8 @@
 package users
 
 import (
-	"github.com/muesli/polly/api/db"
-	"github.com/muesli/polly/api/utils"
+	"github.com/muesli/digitalwhistleblowingfund/api/db"
+	"github.com/muesli/digitalwhistleblowingfund/api/utils"
 
 	"github.com/muesli/smolder"
 )

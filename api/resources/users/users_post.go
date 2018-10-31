@@ -3,8 +3,8 @@ package users
 import (
 	"net/http"
 
-	"github.com/muesli/polly/api/db"
-	"github.com/muesli/polly/api/utils"
+	"github.com/muesli/digitalwhistleblowingfund/api/db"
+	"github.com/muesli/digitalwhistleblowingfund/api/utils"
 
 	"github.com/emicklei/go-restful"
 	"github.com/muesli/smolder"

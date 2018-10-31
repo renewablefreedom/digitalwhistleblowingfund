@@ -4,7 +4,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/muesli/polly/api/db"
+	"github.com/muesli/digitalwhistleblowingfund/api/db"
 )
 
 // BuildURL constructs a url from one or many items

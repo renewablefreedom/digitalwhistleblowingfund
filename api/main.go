@@ -6,20 +6,20 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/muesli/polly/api/config"
-	"github.com/muesli/polly/api/db"
-	"github.com/muesli/polly/api/mailman"
-	"github.com/muesli/polly/api/utils"
+	"github.com/muesli/digitalwhistleblowingfund/api/config"
+	"github.com/muesli/digitalwhistleblowingfund/api/db"
+	"github.com/muesli/digitalwhistleblowingfund/api/mailman"
+	"github.com/muesli/digitalwhistleblowingfund/api/utils"
 
-	"github.com/muesli/polly/api/resources/budgets"
-	"github.com/muesli/polly/api/resources/proposals"
-	"github.com/muesli/polly/api/resources/sessions"
-	"github.com/muesli/polly/api/resources/users"
-	"github.com/muesli/polly/api/resources/votes"
+	"github.com/muesli/digitalwhistleblowingfund/api/resources/budgets"
+	"github.com/muesli/digitalwhistleblowingfund/api/resources/proposals"
+	"github.com/muesli/digitalwhistleblowingfund/api/resources/sessions"
+	"github.com/muesli/digitalwhistleblowingfund/api/resources/users"
+	"github.com/muesli/digitalwhistleblowingfund/api/resources/votes"
 
-	log "github.com/sirupsen/logrus"
 	"github.com/emicklei/go-restful-swagger12"
 	"github.com/muesli/smolder"
+	log "github.com/sirupsen/logrus"
 )
 
 func handleSignals() (chan int, bool) {
@@ -76,8 +76,9 @@ func main() {
 
 	utils.SetupEmailTemplates(*config.Settings)
 	mailman.SetupMailmanContext(context.NewAPIContext().(*db.PollyContext))
-	go mailman.RunLoop()
-	go mailman.RunProposalLoop()
+	// FIXME
+	// go mailman.RunLoop()
+	// go mailman.RunProposalLoop()
 
 	// Setup web-service
 	smolderConfig := smolder.APIConfig{

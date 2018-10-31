@@ -39,6 +39,7 @@ type Data struct {
 		CryptPepper string
 
 		Proposals struct {
+			ManualModeration          bool
 			StartMonth                uint
 			TotalRuntimeMonths        uint
 			TotalGrantValue           uint

@@ -5,8 +5,8 @@ import (
 	"io"
 	"text/template"
 
-	"github.com/muesli/polly/api/config"
-	"github.com/muesli/polly/api/db"
+	"github.com/muesli/digitalwhistleblowingfund/api/config"
+	"github.com/muesli/digitalwhistleblowingfund/api/db"
 
 	"github.com/muesli/gomail"
 )
