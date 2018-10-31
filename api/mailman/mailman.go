@@ -70,7 +70,7 @@ func RunProposalLoop() {
 		}
 
 		for _, p := range proposals {
-			if p.Moderated && !p.StartTrigger && p.Starts.Before(time.Now()) {
+			if p.Moderated && !p.StartTrigger {
 				log.Printf("Proposal '%s' started. Sending out reminder emails...\n", p.Title)
 				utils.SendProposalStarted(p)
 
