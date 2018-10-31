@@ -1,42 +1,124 @@
 <div class="jumbo show-listing">
   <div class="row">
     <div class="col-xs-9 col-xs-offset-0 col-sm-9 col-sm-offset-0 col-md-9 col-md-offset-0">
-        <h3 class="title">Title: <strong>{{proposal.title}}</strong></h3>
-        <div class="left">
-          <div class="detail">
-            Recipient: <strong>{{proposal.recipient}}</strong> {{#if proposal.recipient2}}&amp; <strong>{{proposal.recipient2}}</strong>{{/if}}
-          </div>
-          <div class="detail">
-            Vote Starts: <strong>{{moment-from-now proposal.starts}}</strong> ({{format_time proposal.starts 'D.M.YYYY H:mm z'}})
-          </div>
-          <div class="detail">
-            Vote Ends: <strong>{{moment-from-now proposal.ends}}</strong> ({{format_time proposal.ends 'D.M.YYYY H:mm z'}})
-          </div>
-          <div class="detail">
-            Amount: <strong>{{format-money proposal.value}}</strong>
-          </div>
+      <h3 class="title">Title: <strong>{{proposal.title}}</strong></h3>
+      <div class="left">
+        <div class="detail">
+          Applicant: <strong>{{proposal.applicant}}</strong>
         </div>
+        <div class="detail">
+          Applicant Description: <strong>{{proposal.applicantdescription}}</strong>
+        </div>
+        <div class="detail">
+          Referrer organization: <strong>{{proposal.referrerorganization}}</strong>
+        </div>
+        <div class="detail">
+          Referrer organization contact: <strong>{{proposal.referrercontact}}</strong>
+        </div>
+        <div class="detail">
+          Recipient: <strong>{{proposal.recipient}}</strong>
+        </div>
+        <div class="detail">
+          Recipient Contact: <strong>{{proposal.contact}}</strong>
+        </div>
+        <div class="detail">
+          Start of project: <strong>{{moment-from-now proposal.starts}}</strong> ({{format_time proposal.starts 'D.M.YYYY H:mm z'}})
+        </div>
+        <div class="detail">
+          Amount: <strong>{{format-money proposal.value}}</strong>
+        </div>
+      </div>
     </div>
 
     <div class="col-xs-2 col-xs-offset-1 col-sm-2 col-sm-offset-1 col-md-1 col-md-offset-2 align-middle text-center">
-      <br/>
+      <br />
       <h2><b>{{proposal.votes}}</b></h2> Votes
     </div>
   </div>
 
   <div>
-    <br/>
+    <br />
     <h4>Summary and Goals:</h4>
-    <p class="description"><pre>{{proposal.description}}</pre></p>
-    <br/>
+    <p class="description">
+      <pre>{{proposal.description}}</pre>
+    </p>
+    <br />
 
-    <h4>Specific Actions and Activities:</h4>
-    <p class="actions"><pre>{{proposal.activities}}</pre></p>
-    <br/>
+    <h4>Social goals:</h4>
+    <p class="description">
+      <pre>{{proposal.socialgoals}}</pre>
+    </p>
+    <br />
+
+    <h4>Output of the project:</h4>
+    <p class="actions">
+      <pre>{{proposal.activities}}</pre>
+    </p>
+    <br />
+
+    <h4>Geographical focus:</h4>
+    <p class="actions">
+      <pre>{{proposal.geofocus}}</pre>
+    </p>
+    <br />
+
+    <h4>Whistleblowing protection laws:</h4>
+    <p class="actions">
+      <pre>{{proposal.laws}}</pre>
+    </p>
+    <br />
+
+    <h4>What kind of whistleblowers are expected:</h4>
+    <p class="actions">
+      <pre>{{proposal.whistleblowingtype}}</pre>
+    </p>
+    <br />
+
+    <h4>Motivations of whistleblowers:</h4>
+    <p class="actions">
+      <pre>{{proposal.motivations}}</pre>
+    </p>
+    <br />
+
+    <h4>Partners:</h4>
+    <p class="actions">
+      <pre>{{proposal.partners}}</pre>
+    </p>
+    <br />
+
+    <h4>Required people on board:</h4>
+    <p class="actions">
+      <pre>{{proposal.board}}</pre>
+    </p>
+    <br />
+
+    <h4>What are you going to do with the information you received:</h4>
+    <p class="actions">
+      <pre>{{proposal.information}}</pre>
+    </p>
+    <br />
+
+    <h4>How are you going to use the funding provided:</h4>
+    <p class="actions">
+      <pre>{{proposal.usage}}</pre>
+    </p>
+    <br />
+
+    <h4>Are you going to startup your project without this grant:</h4>
+    <p class="actions">
+      <pre>{{proposal.dependency}}</pre>
+    </p>
+    <br />
+
+    <h4>How do you expect to sustain your project:</h4>
+    <p class="actions">
+      <pre>{{proposal.sustain}}</pre>
+    </p>
+    <br />
 
     {{#if (eq currentUser.user.id "1")}}
       {{#if (eq proposal.moderated false)}}
-        <br/>
+        <br />
         <button {{action 'moderate' proposal.id}} class="btn btn-primary btn-lg btn-block">Allow proposal</button>
       {{/if}}
       {{#link-to "proposals.edit" proposal.id tagName="button" class="btn btn-primary btn-lg btn-block" }}Edit proposal{{/link-to}}
@@ -44,7 +126,8 @@
       {{#if (eq proposal.ended false)}}
         {{#if (eq currentUser.user.id proposal.user.id)}}
           {{#if (eq proposal_has_started false)}}
-            {{#link-to "proposals.edit" proposal.id tagName="button" class="btn btn-primary btn-lg btn-block" }}Edit proposal{{/link-to}}
+            {{#link-to "proposals.edit" proposal.id tagName="button" class="btn btn-primary btn-lg btn-block" }}Edit
+              proposal{{/link-to}}
           {{/if}}
         {{else}}
           {{#if (not-eq currentUserVoted 0)}}
