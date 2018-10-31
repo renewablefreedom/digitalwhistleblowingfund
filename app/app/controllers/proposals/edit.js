@@ -1,85 +1,109 @@
 import Ember from 'ember';
 import moment from 'moment';
 
-const { inject: { service } } = Ember;
+const {
+  inject: {
+    service
+  }
+} = Ember;
 
 export default Ember.Controller.extend({
   currentUser: service('current-user'),
 
   responseMessage: "",
   errorMessage: "",
-  maxmicrobudget: 0,
-  maxvalue: 0,
 
-  title: Ember.computed('proposal', function() {
-      return this.get('proposal').get('title');
+  title: Ember.computed('proposal', function () {
+    return this.get('proposal').get('title');
   }),
-  description: Ember.computed('proposal', function() {
-      return this.get('proposal').get('description');
+  applicant: Ember.computed('proposal', function () {
+    return this.get('proposal').get('applicant');
   }),
-  activities: Ember.computed('proposal', function() {
-      return this.get('proposal').get('activities');
+  applicantdescription: Ember.computed('proposal', function () {
+    return this.get('proposal').get('applicantdescription');
   }),
-  contact: Ember.computed('proposal', function() {
-      return this.get('proposal').get('contact');
+  referrerorganization: Ember.computed('proposal', function () {
+    return this.get('proposal').get('referrerorganization');
   }),
-  recipient: Ember.computed('proposal', function() {
-      return this.get('proposal').get('recipient');
+  referrercontact: Ember.computed('proposal', function () {
+    return this.get('proposal').get('referrercontact');
   }),
-  recipient2: Ember.computed('proposal', function() {
-      return this.get('proposal').get('recipient2');
+  description: Ember.computed('proposal', function () {
+    return this.get('proposal').get('description');
   }),
-  value: Ember.computed('proposal', function() {
-      return this.get('proposal').get('value');
+  socialgoals: Ember.computed('proposal', function () {
+    return this.get('proposal').get('socialgoals');
   }),
-  realvalue: Ember.computed('proposal', function() {
-      return this.get('proposal').get('realvalue');
+  activities: Ember.computed('proposal', function () {
+    return this.get('proposal').get('activities');
   }),
-  startdate: Ember.computed('proposal', function() {
-      return this.get('proposal').get('starts');
+  geofocus: Ember.computed('proposal', function () {
+    return this.get('proposal').get('geofocus');
   }),
-  finisheddate: Ember.computed('proposal', function() {
-      return this.get('proposal').get('finished_date');
+  laws: Ember.computed('proposal', function () {
+    return this.get('proposal').get('laws');
+  }),
+  whistleblowingtype: Ember.computed('proposal', function () {
+    return this.get('proposal').get('whistleblowingtype');
+  }),
+  motivations: Ember.computed('proposal', function () {
+    return this.get('proposal').get('motivations');
+  }),
+  partners: Ember.computed('proposal', function () {
+    return this.get('proposal').get('partners');
+  }),
+  board: Ember.computed('proposal', function () {
+    return this.get('proposal').get('board');
+  }),
+  communication: Ember.computed('proposal', function () {
+    return this.get('proposal').get('communication');
+  }),
+  information: Ember.computed('proposal', function () {
+    return this.get('proposal').get('information');
+  }),
+  usage: Ember.computed('proposal', function () {
+    return this.get('proposal').get('usage');
+  }),
+  dependency: Ember.computed('proposal', function () {
+    return this.get('proposal').get('dependency');
+  }),
+  sustain: Ember.computed('proposal', function () {
+    return this.get('proposal').get('sustain');
+  }),
+  contact: Ember.computed('proposal', function () {
+    return this.get('proposal').get('contact');
+  }),
+  recipient: Ember.computed('proposal', function () {
+    return this.get('proposal').get('recipient');
+  }),
+  value: Ember.computed('proposal', function () {
+    return this.get('proposal').get('value');
+  }),
+  realvalue: Ember.computed('proposal', function () {
+    return this.get('proposal').get('realvalue');
+  }),
+  startdate: Ember.computed('proposal', function () {
+    return this.get('proposal').get('starts');
   }),
 
-  isMicroBudget: Ember.computed('value', function() {
-      const max = this.get('maxmicrobudget');
-      return max === 0 || this.value === '' || parseInt(this.value) <= max;
-  }),
-
-  maxBudget: Ember.computed('startdate', 'maxmicrobudget', 'maxvalue', function() {
-      this.store.query('budget', {
-          month: moment(this.get('startdate')).add(14, 'd').toDate().getMonth() + 1
-      }).then((budget) => {
-          this.set('maxmicrobudget', budget.objectAt(0).get('value'));
-          this.set('maxvalue', budget.objectAt(0).get('maxvalue'));
-      });
-
-      return this.get('maxmicrobudget');
-  }),
-
-  minimumProposalStartDate: Ember.computed(function() {
-      var date = moment().add(1, 'd').toDate();
-      return moment(date).format('YYYY/MM/DD');
-  }),
-
-  isValid: Ember.computed('recipient', 'recipient2', 'contact', 'title', 'description', 'activities', 'value', 'startdate', 'finisheddate', function() {
-      const title = this.get('title');
-      const description = this.get('description');
-      const activities = this.get('activities');
-      const contact = this.get('contact');
-      const recipient = this.get('recipient');
-      const recipient2 = this.get('recipient2');
-      const value = this.get('value');
-      const startdate = this.get('startdate');
-      const finisheddate = this.get('finisheddate');
-
-      return title.length > 0 && description.length > 0 &&
-             activities.length > 0 && contact.length > 0 &&
-             recipient.length > 0 && (value <= this.maxmicrobudget || recipient2.length > 0) &&
-             parseInt(value) > 0 && parseInt(value) <= this.maxvalue &&
-             startdate.getFullYear() > 0 && finisheddate.getFullYear() > 0;
-  }),
+  isValid: Ember.computed('title', 'applicant', 'applicantdescription', 'referrerorganization', 'referrercontact', 'description', 'socialgoals',
+    'activities', 'geofocus', 'laws', 'whistleblowingtype', 'motivations', 'partners', 'board', 'communication', 'information', 'usage',
+    'dependency', 'sustain', 'value', 'recipient', 'contact', 'startdate',
+    function () {
+      return this.title.length > 0 && this.applicant.length > 0 &&
+        this.applicantdescription.length > 0 && this.referrerorganization.length > 0 &&
+        this.referrercontact.length > 0 && this.description.length > 0 &&
+        this.socialgoals.length > 0 && this.activities.length > 0 &&
+        this.geofocus.length > 0 && this.laws.length > 0 &&
+        this.whistleblowingtype.length > 0 && this.motivations.length > 0 &&
+        this.partners.length > 0 && this.board.length > 0 &&
+        this.communication.length > 0 && this.information.length > 0 &&
+        this.usage.length > 0 && this.dependency.length > 0 &&
+        this.sustain.length > 0 && this.recipient.length > 0 &&
+        this.contact.length > 0 &&
+        parseInt(this.value) > 0 &&
+        this.startdate.getFullYear() > 0;
+    }),
   isDisabled: Ember.computed.not('isValid'),
 
   actions: {
@@ -89,38 +113,65 @@ export default Ember.Controller.extend({
       this.set('progressMessage', `Saving proposal...`);
 
       const title = this.get('title');
+      const applicant = this.get('applicant');
+      const applicantdescription = this.get('applicantdescription');
+      const referrerorganization = this.get('referrerorganization');
+      const referrercontact = this.get('referrercontact');
       const description = this.get('description');
+      const socialgoals = this.get('socialgoals');
       const activities = this.get('activities');
-      const contact = this.get('contact');
-      const recipient = this.get('recipient');
-      const recipient2 = this.get('recipient2');
+      const geofocus = this.get('geofocus');
+      const laws = this.get('laws');
+      const whistleblowingtype = this.get('whistleblowingtype');
+      const motivations = this.get('motivations');
+      const partners = this.get('partners');
+      const board = this.get('board');
+      const communication = this.get('communication');
+      const information = this.get('information');
+      const usage = this.get('usage');
+      const dependency = this.get('dependency');
+      const sustain = this.get('sustain');
       const value = this.get('value');
-      const realvalue = this.get('realvalue');
+      const recipient = this.get('recipient');
+      const contact = this.get('contact');
       const startdate = this.get('startdate');
-      const finisheddate = this.get('finisheddate');
 
       var proposal = this.get('proposal');
 
       proposal.set('title', title);
+      proposal.set('applicant', applicant);
+      proposal.set('applicantdescription', applicantdescription);
+      proposal.set('referrerorganization', referrerorganization);
+      proposal.set('referrercontact', referrercontact);
       proposal.set('description', description);
+      proposal.set('socialgoals', socialgoals);
       proposal.set('activities', activities);
+      proposal.set('geofocus', geofocus);
+      proposal.set('laws', laws);
+      proposal.set('whistleblowingtype', whistleblowingtype);
+      proposal.set('motivations', motivations);
+      proposal.set('partners', partners);
+      proposal.set('board', board);
+      proposal.set('communication', communication);
+      proposal.set('information', information);
+      proposal.set('usage', usage);
+      proposal.set('dependency', dependency);
+      proposal.set('sustain', sustain);
       proposal.set('contact', contact);
       proposal.set('recipient', recipient);
-      proposal.set('recipient2', recipient2);
       proposal.set('value', value);
       proposal.set('realvalue', realvalue);
       proposal.set('starts', startdate);
-      proposal.set('finished_date', finisheddate);
 
       proposal.save().then(
-        (/*proposal*/) => {
+        ( /*proposal*/ ) => {
           this.set('responseMessage', `Your proposal has been updated. Thank you!`);
           this.set('progressMessage', '');
-/*          this.set('title', '');
-          this.set('description', '');
-          this.set('recipient', '');
-          this.set('value', '');
-          this.set('startdate', new Date());*/
+          /*          this.set('title', '');
+                    this.set('description', '');
+                    this.set('recipient', '');
+                    this.set('value', '');
+                    this.set('startdate', new Date());*/
         },
         error => {
           this.set('errorMessage', `Failed updating your proposal: ` + error);

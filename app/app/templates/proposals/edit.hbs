@@ -1,54 +1,93 @@
 <div class="jumbotron text-center">
   <h2>Edit your Proposal</h2>
-  <br/>
+  <br />
 
   <div class="form-horizontal form-group form-group-lg row">
     <div class="row">
       <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
-         <label for="title">A terse and specific summary of the activity in one line (subject line)</label>
-         {{input type="text" id="title" value=title class="form-control" placeholder="Please enter a title" autofocus="autofocus"}}
-         <br/>
-         <label from="value">Requested amount in € (estimated maximum) &mash; less than {{maxBudget}}€ for micro grants, up to 5000€ for small grants</label>
-         {{input type="text" value=value id="value" class="form-control" placeholder=(concat "Requested amount in € (estimated maximum)")}}
-         <br/>
-         <label for="description">Summary and overall goals of the proposal</label>
-         {{textarea value=description id="description" class="form-control" placeholder="Please enter a description" rows="5" autoresize="true"}}
-         <br/>
-         <label for="activities">List the specific activities and actions you will perform</label>
-         {{textarea value=activities id="activities" class="form-control" placeholder="Please enter your activities/actions" rows="5" autoresize="true"}}
-         <br/>
-         <label for="recipient">Recipient name (individual or organization)</label>
-         {{input type="text" value=recipient id="recipient" class="form-control" placeholder="Recipient name (individual or organization)"}}
-         <br/>
-         {{#if (eq isMicroBudget false)}}
-         <label for="recipient2">For grants from 2000€: Second recipient/collaborator in another EU country</label>
-         {{input type="text" value=recipient2 id="recipient2" class="form-control" placeholder="For small grants: Collaborator in second EU country"}}
-         <br/>
-         {{/if}}
-         <label for="contact">Contact email address for this proposal (grantee) &mdash; only visible for RFF staff</label>
-         {{input type="text" value=contact id="contact" class="form-control" placeholder="Recipient contact information"}}
-         <br/>
-         <label for="finisheddate">When do you expect the activities associated with this proposal to be over? When should we reach out for a report?</label>
-         {{bootstrap-datepicker id="enddaypicker" value=finisheddate id="finisheddate" startDate=minimumProposalStartDate format="yyyy/mm/dd" autoclose=true class="form-control" placeholder="Expected end date"}}
-		 <br/>
-         <label for="startdate">When do you want the voting on this proposal to begin? (micro: daily, runtime 14 days; small: every 2 months for 2 weeks)</label>
-         {{#if (eq currentUser.user.id "1")}}
-         {{input type="text" value=realvalue class="form-control" placeholder="How much money actually got transferred"}}
-         <br/>
-         {{/if}}
-         {{#if isMicroBudget}}
-         {{bootstrap-datepicker id="daypicker" value=startdate id="startdate" startDate=minimumProposalStartDate format="yyyy/mm/dd" autoclose=true class="form-control" placeholder="Start date of the proposal vote"}}
-         {{else}}
-         {{bootstrap-datepicker id="monthpicker" value=startdate id="startdate" startDate=minimumProposalStartDate format="yyyy/mm" minViewMode=1 autoclose=true class="form-control" placeholder="Which month to run this proposal in"}}
-         {{/if}}
+        <label for="title">A terse and specific summary of the activity in one line (subject line)</label>
+        {{input type="text" id="title" value=title class="form-control" placeholder="Please enter a title" autofocus="autofocus"}}
+        <br />
+        <label for="applicant">Applicant name</label>
+        {{input type="text" id="applicant" value=applicant class="form-control" placeholder="The name of the team / organization applying" autofocus="autofocus"}}
+        <br />
+        <label for="applicantdescription">Applicant description</label>
+        {{input type="text" id="applicantdescription" value=applicantdescription class="form-control" placeholder="Describe who you are, whether single organization, informal team or group of organizations" autofocus="autofocus"}}
+        <br />
+        <label for="referrerorganization">Referrer organization</label>
+        {{input type="text" id="referrerorganization" value=referrerorganization class="form-control" placeholder="Which network you are part of / who is endorsing your proposal" autofocus="autofocus"}}
+        <br />
+        <label for="referrercontact">Referrer organization contact</label>
+        {{input type="text" id="referrercontact" value=referrercontact class="form-control" placeholder="Contact of who's endorsing your proposal" autofocus="autofocus"}}
+        <br />
+        <label for="description">Summary of the proposal</label>
+        {{textarea value=description id="description" class="form-control" placeholder="Provide a description in 3-5 sentences on how the whistleblowing project will work" rows="5" autoresize="true"}}
+        <br />
+        <label for="socialgoals">Social goals of the whistleblowing project</label>
+        {{textarea value=socialgoals id="socialgoals" class="form-control" placeholder="Highlight the public interest goals you want to achieve with this" rows="5" autoresize="true"}}
+        <br />
+        <label for="activities">Output of the whistleblowing project</label>
+        {{textarea value=activities id="activities" class="form-control" placeholder="Highlight the effective / practical outputs of your whistleblowing project (i.e. publishing news to let justice act, uncovering XYZ reporting to justice, providing assistance to whistleblowers in sectory XYZ, etc)" rows="5" autoresize="true"}}
+        <br />
+        <label for="geofocus">Which is the geographical focus of the whistleblowing project?</label>
+        {{input type="text" id="geofocus" value=geofocus class="form-control" placeholder="Specify if this project is meant for a specific country or region" autofocus="autofocus"}}
+        <br />
+        <label for="laws">Are there any whistleblowing protection laws in the geographical area you focus on?</label>
+        {{input type="text" id="laws" value=laws class="form-control" placeholder="If you already have done a legal analysis with a lawyer, or if you will need support for this" autofocus="autofocus"}}
+        <br />
+        <label for="whistleblowingtype">What kind of whistleblowers do you expect will send submissions to your
+          platform?</label>
+        {{input type="text" id="whistleblowingtype" value=whistleblowingtype class="form-control" placeholder="Who are the possible whistleblowers you want to get in touch with?" autofocus="autofocus"}}
+        <br />
+        <label for="motivations">Which are the motivations of whistleblowers sharing information with you?</label>
+        {{input type="text" id="motivations" value=motivations class="form-control" placeholder="Why would a whistleblower share information with you?" autofocus="autofocus"}}
+        <br />
+        <label for="partners">Do you have partners?</label>
+        {{textarea value=partners id="partners" class="form-control" placeholder="Are there partner organizations collaborating with you in running the organization? If so, who are they and what is their role?" rows="5" autoresize="true"}}
+        <br />
+        <label for="board">Do you already have on board all the required people to startup this project? If so, which
+          are the roles of people contributing to the projects?</label>
+        {{textarea value=board id="board" class="form-control" placeholder="Describe the organization of the people participating in the project" rows="5" autoresize="true"}}
+        <br />
+        <label for="communication">How will you reach the potential whistleblowers? How will the project get promoted?</label>
+        {{input type="text" id="communication" value=communication class="form-control" placeholder="Describe your communication strategy and tactics to let the initiative become known" autofocus="autofocus"}}
+        <br />
+        <label for="information">What are you going to do with the information received from whistleblowers?</label>
+        {{input type="text" id="information" value=information class="form-control" placeholder="Describe how you expect to work on received submissions, transforming information into action" autofocus="autofocus"}}
+        <br />
+        <label for="usage">How are you going to use the funding provided?</label>
+        {{textarea value=usage id="usage" class="form-control" placeholder="List here the budget items, describe briefly how you will use the money" rows="5" autoresize="true"}}
+        <br />
+        <label for="dependency">Are you going to startup your whistleblowing project also without this grant?</label>
+        {{input type="text" id="dependency" value=dependency class="form-control" placeholder="Please describe if you will do that and with which possible limitations" autofocus="autofocus"}}
+        <br />
+        <label from="startdate">When do you expect to start / publicly announce this project?</label>
+        {{bootstrap-datepicker id="daypicker" value=startdate startDate="" format="yyyy/mm/dd" autoclose=true class="form-control" placeholder="If already defined, when would it be best for you to announce the project publicly?"}}
+        <br />
+        <label for="sustain">How do you expect to sustain your whistleblowing project after the end of the grant?</label>
+        {{input type="text" id="sustain" value=sustain class="form-control" placeholder="" autofocus="autofocus"}}
+        <br />
+        <label from="value">Requested amount in € (estimated maximum)</label>
+        {{input type="text" value=value id="value" class="form-control" placeholder=(concat "Requested amount in € (estimated maximum)")}}
+        <br />
+        {{#if (eq currentUser.user.id "1")}}
+          {{input type="text" value=realvalue class="form-control" placeholder="How much money actually got transferred"}}
+          <br />
+        {{/if}}
+        <label for="recipient">Recipient name (individual or organization)</label>
+        {{input type="text" value=recipient id="recipient" class="form-control" placeholder="Who will receive the money"}}
+        <br />
+        <label for="contact">Contact email address for this proposal (grantee) &mdash; only visible for DWF staff</label>
+        {{input type="text" value=contact id="contact" class="form-control" placeholder="Recipient contact information"}}
       </div>
     </div>
 
-    <br/>
+    <br />
 
     <div class="row">
       <div class="col-xs-10 col-xs-offset-1 col-sm-offset-7 col-sm-4 col-md-3 col-md-offset-8">
-        <button disabled={{isDisabled}} {{action 'saveProposal'}} class="btn btn-primary btn-lg btn-block">Save proposal</button>
+        <button disabled={{isDisabled}} {{action 'saveProposal'}} class="btn btn-primary btn-lg btn-block">Save
+          proposal</button>
       </div>
     </div>
   </div>
