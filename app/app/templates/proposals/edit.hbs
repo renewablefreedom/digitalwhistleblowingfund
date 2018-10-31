@@ -70,6 +70,7 @@
         <label from="value">Requested amount in € (estimated maximum)</label>
         {{input type="text" value=value id="value" class="form-control" placeholder=(concat "Requested amount in € (estimated maximum)")}}
         <br />
+        <label from="realvalue">Actual required amount in €</label>
         {{#if (eq currentUser.user.id "1")}}
           {{input type="text" value=realvalue class="form-control" placeholder="How much money actually got transferred"}}
           <br />

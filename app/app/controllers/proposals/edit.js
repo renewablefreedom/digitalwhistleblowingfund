@@ -90,19 +90,45 @@ export default Ember.Controller.extend({
     'activities', 'geofocus', 'laws', 'whistleblowingtype', 'motivations', 'partners', 'board', 'communication', 'information', 'usage',
     'dependency', 'sustain', 'value', 'recipient', 'contact', 'startdate',
     function () {
-      return this.title.length > 0 && this.applicant.length > 0 &&
-        this.applicantdescription.length > 0 && this.referrerorganization.length > 0 &&
-        this.referrercontact.length > 0 && this.description.length > 0 &&
-        this.socialgoals.length > 0 && this.activities.length > 0 &&
-        this.geofocus.length > 0 && this.laws.length > 0 &&
-        this.whistleblowingtype.length > 0 && this.motivations.length > 0 &&
-        this.partners.length > 0 && this.board.length > 0 &&
-        this.communication.length > 0 && this.information.length > 0 &&
-        this.usage.length > 0 && this.dependency.length > 0 &&
-        this.sustain.length > 0 && this.recipient.length > 0 &&
-        this.contact.length > 0 &&
-        parseInt(this.value) > 0 &&
-        this.startdate.getFullYear() > 0;
+
+      const title = this.get('title');
+      const applicant = this.get('applicant');
+      const applicantdescription = this.get('applicantdescription');
+      const referrerorganization = this.get('referrerorganization');
+      const referrercontact = this.get('referrercontact');
+      const description = this.get('description');
+      const socialgoals = this.get('socialgoals');
+      const activities = this.get('activities');
+      const geofocus = this.get('geofocus');
+      const laws = this.get('laws');
+      const whistleblowingtype = this.get('whistleblowingtype');
+      const motivations = this.get('motivations');
+      const partners = this.get('partners');
+      const board = this.get('board');
+      const communication = this.get('communication');
+      const information = this.get('information');
+      const usage = this.get('usage');
+      const dependency = this.get('dependency');
+      const sustain = this.get('sustain');
+      const contact = this.get('contact');
+      const recipient = this.get('recipient');
+      const value = this.get('value');
+      const realvalue = this.get('realvalue');
+      const startdate = this.get('startdate');
+
+      return title.length > 0 && applicant.length > 0 &&
+        applicantdescription.length > 0 && referrerorganization.length > 0 &&
+        referrercontact.length > 0 && description.length > 0 &&
+        socialgoals.length > 0 && activities.length > 0 &&
+        geofocus.length > 0 && laws.length > 0 &&
+        whistleblowingtype.length > 0 && motivations.length > 0 &&
+        partners.length > 0 && board.length > 0 &&
+        communication.length > 0 && information.length > 0 &&
+        usage.length > 0 && dependency.length > 0 &&
+        sustain.length > 0 && recipient.length > 0 &&
+        contact.length > 0 &&
+        parseInt(value) > 0 &&
+        startdate.getFullYear() > 0;
     }),
   isDisabled: Ember.computed.not('isValid'),
 
@@ -132,6 +158,7 @@ export default Ember.Controller.extend({
       const dependency = this.get('dependency');
       const sustain = this.get('sustain');
       const value = this.get('value');
+      const realvalue = this.get('realvalue');
       const recipient = this.get('recipient');
       const contact = this.get('contact');
       const startdate = this.get('startdate');
