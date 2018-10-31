@@ -131,7 +131,7 @@ func (proposal *Proposal) Save(context *PollyContext) error {
 
 // Started returns true if a proposal has started
 func (proposal *Proposal) Started(context *PollyContext) bool {
-	return proposal.Starts.Before(time.Now())
+	return proposal.Moderated
 }
 
 // Ends returns when this proposal ends

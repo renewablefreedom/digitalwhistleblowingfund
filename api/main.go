@@ -76,9 +76,8 @@ func main() {
 
 	utils.SetupEmailTemplates(*config.Settings)
 	mailman.SetupMailmanContext(context.NewAPIContext().(*db.PollyContext))
-	// FIXME
-	// go mailman.RunLoop()
-	// go mailman.RunProposalLoop()
+	go mailman.RunLoop()
+	go mailman.RunProposalLoop()
 
 	// Setup web-service
 	smolderConfig := smolder.APIConfig{
