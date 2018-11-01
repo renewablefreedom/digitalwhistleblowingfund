@@ -39,6 +39,7 @@ type ProposalPostStruct struct {
 		RealValue            uint64    `json:"realvalue"`
 		Moderated            bool      `json:"moderated"`
 		Starts               time.Time `json:"starts"`
+		Finished             uint64    `json:"finished"`
 	} `json:"proposal"`
 }
 

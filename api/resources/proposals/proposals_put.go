@@ -103,6 +103,10 @@ func (r *ProposalResource) Put(context smolder.APIContext, data interface{}, req
 		}
 
 		proposal.Moderated = pps.Proposal.Moderated
+
+		if pps.Proposal.Finished > 0 {
+			proposal.Finished = pps.Proposal.Finished
+		}
 	}
 
 	err = proposal.Update(context.(*db.PollyContext))

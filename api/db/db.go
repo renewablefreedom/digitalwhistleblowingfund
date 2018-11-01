@@ -85,6 +85,7 @@ func GetDatabase() *sql.DB {
 				  vetos			int			DEFAULT 0,
 				  moderated     bool        DEFAULT false,
 				  started		bool        DEFAULT false,
+				  finished      int         DEFAULT 0,
 				  CONSTRAINT  	fk_user		FOREIGN KEY (userid) REFERENCES users (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE
 				)`,
 			`CREATE TABLE IF NOT EXISTS votes
