@@ -36,13 +36,27 @@ export default Ember.Controller.extend({
     moderate(id) {
       this.store.findRecord('proposal', id).then(function (proposal) {
         proposal.set('moderated', true);
-        proposal.save();
+        proposal.save().then(
+          ( /*proposal*/ ) => {
+            this.transitionTo('proposals.all');
+          },
+          error => {
+            alert(error);
+          }
+        );
       });
     },
     accept(id) {
       this.store.findRecord('proposal', id).then(function (proposal) {
         proposal.set('finished', 2);
-        proposal.save();
+        proposal.save().then(
+          ( /*proposal*/ ) => {
+            this.transitionTo('proposals.all');
+          },
+          error => {
+            alert(error);
+          }
+        );
       });
     },
     reject(id) {
