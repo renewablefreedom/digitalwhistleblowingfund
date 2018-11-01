@@ -62,7 +62,14 @@ export default Ember.Controller.extend({
     reject(id) {
       this.store.findRecord('proposal', id).then(function (proposal) {
         proposal.set('finished', 1);
-        proposal.save();
+        proposal.save().then(
+          ( /*proposal*/ ) => {
+            this.transitionToRoute('proposals.all');
+          },
+          error => {
+            alert(error);
+          }
+        );
       });
     },
     vote() {
