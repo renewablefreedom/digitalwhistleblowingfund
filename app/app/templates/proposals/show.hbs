@@ -122,6 +122,9 @@
         <button {{action 'moderate' proposal.id}} class="btn btn-primary btn-lg btn-block">Allow proposal</button>
       {{/if}}
       {{#link-to "proposals.edit" proposal.id tagName="button" class="btn btn-primary btn-lg btn-block" }}Edit proposal{{/link-to}}
+      <br />
+      <button {{action 'accept' proposal.id}} class="btn btn-primary btn-lg btn-block">Accept proposal</button>
+      <button {{action 'reject' proposal.id}} class="btn btn-primary btn-lg btn-block">Reject proposal</button>
     {{else}}
       {{#if (eq proposal.ended false)}}
         {{#if (eq currentUser.user.id proposal.user.id)}}
@@ -129,8 +132,6 @@
             {{#link-to "proposals.edit" proposal.id tagName="button" class="btn btn-primary btn-lg btn-block" }}Edit
               proposal{{/link-to}}
           {{/if}}
-          <button {{action 'accept' proposal.id}} class="btn btn-primary btn-lg btn-block">Accept proposal</button>
-          <button {{action 'reject' proposal.id}} class="btn btn-primary btn-lg btn-block">Reject proposal</button>
         {{else}}
           {{#if (not-eq currentUserVoted 0)}}
             {{#if (eq currentUserVoted 1)}}
