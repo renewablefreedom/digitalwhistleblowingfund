@@ -34,11 +34,12 @@ export default Ember.Controller.extend({
 
   actions: {
     moderate(id) {
+      var c = this;
       this.store.findRecord('proposal', id).then(function (proposal) {
         proposal.set('moderated', true);
         proposal.save().then(
-          ( /*proposal*/ ) => {
-            this.transitionToRoute('proposals.all');
+          (proposal) => {
+            c.transitionToRoute('proposals.all');
           },
           error => {
             alert(error);
@@ -47,11 +48,12 @@ export default Ember.Controller.extend({
       });
     },
     accept(id) {
+      var c = this;
       this.store.findRecord('proposal', id).then(function (proposal) {
         proposal.set('finished', 2);
         proposal.save().then(
-          ( /*proposal*/ ) => {
-            this.transitionToRoute('proposals.all');
+          (proposal) => {
+            c.transitionToRoute('proposals.all');
           },
           error => {
             alert(error);
@@ -60,11 +62,12 @@ export default Ember.Controller.extend({
       });
     },
     reject(id) {
+      var c = this;
       this.store.findRecord('proposal', id).then(function (proposal) {
         proposal.set('finished', 1);
         proposal.save().then(
-          ( /*proposal*/ ) => {
-            this.transitionToRoute('proposals.all');
+          (proposal) => {
+            c.transitionToRoute('proposals.all');
           },
           error => {
             alert(error);
