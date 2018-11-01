@@ -38,7 +38,7 @@ export default Ember.Controller.extend({
         proposal.set('moderated', true);
         proposal.save().then(
           ( /*proposal*/ ) => {
-            this.transitionTo('proposals.all');
+            this.transitionToRoute('proposals.all');
           },
           error => {
             alert(error);
@@ -51,7 +51,7 @@ export default Ember.Controller.extend({
         proposal.set('finished', 2);
         proposal.save().then(
           ( /*proposal*/ ) => {
-            this.transitionTo('proposals.all');
+            this.transitionToRoute('proposals.all');
           },
           error => {
             alert(error);
