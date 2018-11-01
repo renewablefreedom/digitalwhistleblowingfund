@@ -38,6 +38,9 @@ type Data struct {
 	App struct {
 		CryptPepper string
 
+		SpamQuestion string
+		SpamAnswer   string
+
 		Proposals struct {
 			ManualModeration          bool
 			StartMonth                uint

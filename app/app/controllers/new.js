@@ -24,13 +24,14 @@ export default Ember.Controller.extend({
   value: "",
   recipient: "",
   contact: "",
+  spamanswer: "",
   responseMessage: "",
   errorMessage: "",
   startdate: new Date(),
 
   isValid: Ember.computed('title', 'applicant', 'applicantdescription', 'referrerorganization', 'referrercontact', 'description', 'socialgoals',
     'activities', 'geofocus', 'laws', 'whistleblowingtype', 'motivations', 'partners', 'board', 'communication', 'information', 'usage',
-    'dependency', 'sustain', 'value', 'recipient', 'contact', 'startdate',
+    'dependency', 'sustain', 'value', 'recipient', 'contact', 'startdate', 'spamanswer',
     function () {
       return this.title.length > 0 && this.applicant.length > 0 &&
         this.applicantdescription.length > 0 && this.referrerorganization.length > 0 &&
@@ -42,7 +43,7 @@ export default Ember.Controller.extend({
         this.communication.length > 0 && this.information.length > 0 &&
         this.usage.length > 0 && this.dependency.length > 0 &&
         this.sustain.length > 0 && this.recipient.length > 0 &&
-        this.contact.length > 0 &&
+        this.contact.length > 0 && this.spamanswer == '42' &&
         parseInt(this.value) > 0 &&
         this.startdate.getFullYear() > 0;
     }),
@@ -77,6 +78,7 @@ export default Ember.Controller.extend({
       const recipient = this.get('recipient');
       const contact = this.get('contact');
       const startdate = this.get('startdate');
+      const spamanswer = this.get('spamanswer');
 
       const newProposal = this.store.createRecord('proposal', {
         title: title,
@@ -101,7 +103,8 @@ export default Ember.Controller.extend({
         value: value,
         recipient: recipient,
         contact: contact,
-        starts: startdate
+        starts: startdate,
+        spamanswer: spamanswer
       });
       newProposal.save().then(
         ( /*proposal*/ ) => {
@@ -129,6 +132,7 @@ export default Ember.Controller.extend({
           this.set('value', '');
           this.set('recipient', '');
           this.set('contact', '');
+          this.set('spamanswer', '');
           this.set('startdate', new Date());
         },
         error => {

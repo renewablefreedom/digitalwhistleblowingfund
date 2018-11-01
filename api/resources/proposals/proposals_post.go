@@ -1,6 +1,7 @@
 package proposals
 
 import (
+	"errors"
 	"net/http"
 	"time"
 
@@ -40,6 +41,7 @@ type ProposalPostStruct struct {
 		Moderated            bool      `json:"moderated"`
 		Starts               time.Time `json:"starts"`
 		Finished             uint64    `json:"finished"`
+		SpamAnswer           string    `json:"spamanswer"`
 	} `json:"proposal"`
 }
 
@@ -60,10 +62,20 @@ func (r *ProposalResource) PostParams() []*restful.Parameter {
 
 // Post processes an incoming POST (create) request
 func (r *ProposalResource) Post(context smolder.APIContext, data interface{}, request *restful.Request, response *restful.Response) {
+	ctx := context.(*db.PollyContext)
 	resp := ProposalResponse{}
 	resp.Init(context)
 
 	pps := data.(*ProposalPostStruct)
+
+	if pps.Proposal.SpamAnswer != ctx.Config.App.SpamAnswer {
+		smolder.ErrorResponseHandler(request, response, smolder.NewErrorResponse(
+			http.StatusUnauthorized,
+			true,
+			errors.New("Please enter the correct value in the spam protection field"),
+			"ProposalResource POST"))
+		return
+	}
 
 	proposal := db.Proposal{
 		UserID:               1,
