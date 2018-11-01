@@ -27,6 +27,7 @@ export default DS.Model.extend({
   value: DS.attr('number'),
   realvalue: DS.attr('number'),
   starts: DS.attr('isodate'),
+  finished: DS.attr('number'),
   ended: DS.attr('boolean'),
   accepted: DS.attr('boolean'),
   moderated: DS.attr('boolean'),
