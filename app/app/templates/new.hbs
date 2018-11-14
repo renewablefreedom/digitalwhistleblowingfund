@@ -2,9 +2,7 @@
   <h2>Application Form</h2>
   <p>This application form will guide you in detailing how your whistleblowing project idea is made up, with the goal
     to let you think about and approach it in a structured way.
-    Please read through the document <a href="https://docs.google.com/document/d/1Y5h_lSZq-MsefH1LkEjHN5uOfEccyyI4oJgd7tm2Iho">Setup
-      Guidelines: Whistleblowing initiative with GlobaLeaks 0.2</a> to get an overview of the key items you should
-    consider while planning for the project.</p>
+  </p>
   <p>
     It will take 15-30 minutes to properly fill out the form in detail.
   </p>
@@ -53,8 +51,8 @@
         <label for="partners">Do you have partners?</label>
         {{textarea value=partners id="partners" class="form-control" placeholder="Are there partner organizations collaborating with you in running the organization? If so, who are they and what is their role?" rows="5" autoresize="true"}}
         <br />
-        <label for="board">Do you already have on board all the required people to startup this project? If so, which
-          are the roles of people contributing to the projects?</label>
+        <label for="board">Do you already have on board all the required people to startup this project? If so,
+          which are the roles of people contributing to the project?</label>
         {{textarea value=board id="board" class="form-control" placeholder="Describe the organization of the people participating in the project" rows="5" autoresize="true"}}
         <br />
         <label for="communication">How will you reach the potential whistleblowers? How will the project get promoted?</label>
@@ -75,7 +73,7 @@
         <label for="sustain">How do you expect to sustain your whistleblowing project after the end of the grant?</label>
         {{input type="text" id="sustain" value=sustain class="form-control" placeholder="" autofocus="autofocus"}}
         <br />
-        <label from="value">Requested amount in € (estimated maximum)</label>
+        <label from="value">Requested amount in € (maximum €3000)</label>
         {{input type="text" value=value id="value" class="form-control" placeholder=(concat "Requested amount in € (estimated maximum)")}}
         <br />
         <label for="recipient">Recipient name (individual or organization)</label>
@@ -93,7 +91,7 @@
 
     <div class="row">
       <div class="col-xs-10 col-xs-offset-1 col-sm-offset-7 col-sm-4 col-md-3 col-md-offset-8">
-        <button disabled={{isDisabled}} {{action 'createProposal'}} class="btn btn-primary btn-lg btn-block">Add
+        <button disabled={{isDisabled}} {{action 'createProposal'}} class="btn btn-primary btn-lg btn-block">Submit
           proposal</button>
       </div>
     </div>
