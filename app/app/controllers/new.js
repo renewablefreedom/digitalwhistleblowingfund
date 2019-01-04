@@ -12,40 +12,29 @@ export default Ember.Controller.extend({
   activities: "",
   geofocus: "",
   laws: "",
-  whistleblowingtype: "",
-  motivations: "",
-  partners: "",
-  board: "",
   communication: "",
   information: "",
   usage: "",
-  dependency: "",
   sustain: "",
-  value: "",
   recipient: "",
   contact: "",
   spamanswer: "",
   responseMessage: "",
   errorMessage: "",
-  startdate: new Date(),
 
   isValid: Ember.computed('title', 'applicant', 'applicantdescription', 'referrerorganization', 'referrercontact', 'description', 'socialgoals',
-    'activities', 'geofocus', 'laws', 'whistleblowingtype', 'motivations', 'partners', 'board', 'communication', 'information', 'usage',
-    'dependency', 'sustain', 'value', 'recipient', 'contact', 'startdate', 'spamanswer',
+    'activities', 'geofocus', 'laws', 'communication', 'information', 'usage',
+    'sustain', 'recipient', 'contact', 'spamanswer',
     function () {
       return this.title.length > 0 && this.applicant.length > 0 &&
         this.applicantdescription.length > 0 && this.referrerorganization.length > 0 &&
         this.referrercontact.length > 0 && this.description.length > 0 &&
         this.socialgoals.length > 0 && this.activities.length > 0 &&
         this.geofocus.length > 0 && this.laws.length > 0 &&
-        this.whistleblowingtype.length > 0 && this.motivations.length > 0 &&
-        this.partners.length > 0 && this.board.length > 0 &&
         this.communication.length > 0 && this.information.length > 0 &&
-        this.usage.length > 0 && this.dependency.length > 0 &&
+        this.usage.length > 0 &&
         this.sustain.length > 0 && this.recipient.length > 0 &&
-        this.contact.length > 0 && this.spamanswer == '42' &&
-        parseInt(this.value) > 0 &&
-        this.startdate.getFullYear() > 0;
+        this.contact.length > 0 && this.spamanswer == '42';
     }),
   isDisabled: Ember.computed.not('isValid'),
 
@@ -65,20 +54,20 @@ export default Ember.Controller.extend({
       const activities = this.get('activities');
       const geofocus = this.get('geofocus');
       const laws = this.get('laws');
-      const whistleblowingtype = this.get('whistleblowingtype');
-      const motivations = this.get('motivations');
-      const partners = this.get('partners');
-      const board = this.get('board');
       const communication = this.get('communication');
       const information = this.get('information');
       const usage = this.get('usage');
-      const dependency = this.get('dependency');
       const sustain = this.get('sustain');
-      const value = this.get('value');
       const recipient = this.get('recipient');
       const contact = this.get('contact');
-      const startdate = this.get('startdate');
       const spamanswer = this.get('spamanswer');
+      const startdate = new Date();
+      const board = false;
+      const dependency = false;
+      const value = 3000;
+      const whistleblowingtype = '';
+      const motivations = '';
+      const partners = '';
 
       const newProposal = this.store.createRecord('proposal', {
         title: title,
@@ -120,20 +109,13 @@ export default Ember.Controller.extend({
           this.set('activities', '');
           this.set('geofocus', '');
           this.set('laws', '');
-          this.set('whistleblowingtype', '');
-          this.set('motivations', '');
-          this.set('partners', '');
-          this.set('board', '');
           this.set('communication', '');
           this.set('information', '');
           this.set('usage', '');
-          this.set('dependency', '');
           this.set('sustain', '');
-          this.set('value', '');
           this.set('recipient', '');
           this.set('contact', '');
           this.set('spamanswer', '');
-          this.set('startdate', new Date());
         },
         error => {
           this.set('errorMessage', `Failed adding your proposal: ` + error);

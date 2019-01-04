@@ -41,20 +41,6 @@
         <label for="laws">Are there any whistleblowing protection laws in the geographical area you focus on?</label>
         {{input type="text" id="laws" value=laws class="form-control" placeholder="If you already have done a legal analysis with a lawyer, or if you will need support for this" autofocus="autofocus"}}
         <br />
-        <label for="whistleblowingtype">What kind of whistleblowers do you expect will send submissions to your
-          platform?</label>
-        {{input type="text" id="whistleblowingtype" value=whistleblowingtype class="form-control" placeholder="Who are the possible whistleblowers you want to get in touch with?" autofocus="autofocus"}}
-        <br />
-        <label for="motivations">Which are the motivations of whistleblowers sharing information with you?</label>
-        {{input type="text" id="motivations" value=motivations class="form-control" placeholder="Why would a whistleblower share information with you?" autofocus="autofocus"}}
-        <br />
-        <label for="partners">Do you have partners?</label>
-        {{textarea value=partners id="partners" class="form-control" placeholder="Are there partner organizations collaborating with you in running the organization? If so, who are they and what is their role?" rows="5" autoresize="true"}}
-        <br />
-        <label for="board">Do you already have on board all the required people to startup this project? If so,
-          which are the roles of people contributing to the project?</label>
-        {{textarea value=board id="board" class="form-control" placeholder="Describe the organization of the people participating in the project" rows="5" autoresize="true"}}
-        <br />
         <label for="communication">How will you reach the potential whistleblowers? How will the project get promoted?</label>
         {{input type="text" id="communication" value=communication class="form-control" placeholder="Describe your communication strategy and tactics to let the initiative become known" autofocus="autofocus"}}
         <br />
@@ -64,17 +50,8 @@
         <label for="usage">How are you going to use the funding provided?</label>
         {{textarea value=usage id="usage" class="form-control" placeholder="List here the budget items, describe briefly how you will use the money" rows="5" autoresize="true"}}
         <br />
-        <label for="dependency">Are you going to startup your whistleblowing project also without this grant?</label>
-        {{input type="text" id="dependency" value=dependency class="form-control" placeholder="Please describe if you will do that and with which possible limitations" autofocus="autofocus"}}
-        <br />
-        <label from="startdate">When do you expect to start / publicly announce this project?</label>
-        {{bootstrap-datepicker id="daypicker" value=startdate startDate="" format="yyyy/mm/dd" autoclose=true class="form-control" placeholder="If already defined, when would it be best for you to announce the project publicly?"}}
-        <br />
         <label for="sustain">How do you expect to sustain your whistleblowing project after the end of the grant?</label>
         {{input type="text" id="sustain" value=sustain class="form-control" placeholder="" autofocus="autofocus"}}
-        <br />
-        <label from="value">Requested amount in € (maximum €3000)</label>
-        {{input type="text" value=value id="value" class="form-control" placeholder=(concat "Requested amount in € (estimated maximum)")}}
         <br />
         <label for="recipient">Recipient name (individual or organization)</label>
         {{input type="text" value=recipient id="recipient" class="form-control" placeholder="Who will receive the money"}}
